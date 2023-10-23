@@ -5,7 +5,11 @@ public class Color {
     private Triplet rgb;
 
     public Color(double r, double g, double b) {
-        this.rgb = new Triplet(r,g,b);
+        try {
+            this.rgb = new Triplet(r,g,b);
+        } catch (Exception e) {
+            System.err.println("Saisie incorrecte : la somme des couleurs des sources de lumiére dépasse 1 sur une des composantes");
+        }
     }
 
     public double getRValue() {
