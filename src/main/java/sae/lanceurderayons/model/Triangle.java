@@ -1,11 +1,11 @@
 package sae.lanceurderayons.model;
 
 public class Triangle {
-    private Point pX;
+    private final Point pX;
 
-    private Point pY;
+    private final Point pY;
 
-    private Point pZ;
+    private final Point pZ;
 
     public Triangle(Point x, Point y, Point z) {
         this.pX = x;

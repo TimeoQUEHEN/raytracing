@@ -23,31 +23,31 @@ public class Vector {
         return this.destDirNorm.getZ();
     }
 
-    public Triplet addition(Triplet triplet) {
+    protected Triplet addition(Triplet triplet) {
         return destDirNorm.addition(triplet);
     }
 
-    public Triplet substraction(Triplet triplet) {
+    protected Triplet substraction(Triplet triplet) {
         return destDirNorm.substraction(triplet);
     }
 
-    public Triplet multiplyUsingAScalar(double d) {
+    protected Triplet multiplyUsingAScalar(double d) {
         return destDirNorm.multiplyUsingAScalar(d);
     }
 
-    public Triplet scalarProduct(Triplet triplet) {
+    protected Triplet scalarProduct(Triplet triplet) {
         return destDirNorm.scalarProduct(triplet);
     }
 
-    public Triplet vectorProduct(Triplet triplet) {
+    protected Triplet vectorProduct(Triplet triplet) {
         return destDirNorm.vectorProduct(triplet);
     }
 
-    public double length() {
+    protected double length() {
         return destDirNorm.length();
     }
 
-    public Triplet norm() {
+    protected Triplet norm() {
         return destDirNorm.norm();
     }
 }

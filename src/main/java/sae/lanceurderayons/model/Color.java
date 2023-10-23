@@ -24,15 +24,15 @@ public class Color {
         return this.rgb.getZ();
     }
 
-    public Triplet addition(Triplet triplet) {
+    protected Triplet addition(Triplet triplet) {
         return rgb.addition(triplet);
     }
 
-    public Triplet multiplyUsingAScalar(double d) {
+    protected Triplet multiplyUsingAScalar(double d) {
         return rgb.multiplyUsingAScalar(d);
     }
 
-    public Triplet schursProduct(Triplet triplet) {
+    protected Triplet schursProduct(Triplet triplet) {
         return rgb.schursProduct(triplet);
     }
 }

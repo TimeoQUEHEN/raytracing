@@ -20,11 +20,11 @@ public class Point {
         return coords.getZ();
     }
 
-    public Triplet substraction(Triplet triplet) {
+    protected Triplet substraction(Triplet triplet) {
         return coords.substraction(triplet);
     }
 
-    public Triplet multiplyUsingAScalar(double d) {
+    protected Triplet multiplyUsingAScalar(double d) {
         return coords.multiplyUsingAScalar(d);
     }
 }
