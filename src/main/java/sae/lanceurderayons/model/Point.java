@@ -21,10 +21,10 @@ public class Point {
     }
 
     public Triplet substraction(Triplet triplet) {
-        return new Triplet(this.getX()-triplet.getX(),this.getY()-triplet.getY(),this.getZ()-triplet.getZ());
+        return coords.substraction(triplet);
     }
 
     public Triplet multiplyUsingAScalar(double d) {
-        return new Triplet(this.getX()*d,this.getY()*d,this.getZ()*d);
+        return coords.multiplyUsingAScalar(d);
     }
 }

@@ -21,14 +21,14 @@ public class Color {
     }
 
     public Triplet addition(Triplet triplet) {
-        return new Triplet(this.getRValue()+triplet.getX(),this.getBValue()+triplet.getY(),this.getBValue()+triplet.getZ());
+        return rgb.addition(triplet);
     }
 
     public Triplet multiplyUsingAScalar(double d) {
-        return new Triplet(this.getRValue()*d,this.getGValue()*d,this.getBValue()*d);
+        return rgb.multiplyUsingAScalar(d);
     }
 
     public Triplet schursProduct(Triplet triplet) {
-        return new Triplet(this.getRValue() * triplet.getX(), this.getGValue() * triplet.getY(), this.getBValue() * triplet.getZ());
+        return rgb.schursProduct(triplet);
     }
 }
