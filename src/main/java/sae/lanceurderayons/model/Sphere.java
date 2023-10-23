@@ -1,39 +1,28 @@
 package sae.lanceurderayons.model;
 
 public class Sphere implements IElements {
-	private int x,y,z;
-	private int r;
-	public Sphere(int x, int y, int z, int r) {
-		super();
-		this.x = x;
-		this.y = y;
-		this.z = z;
+	private Point center;
+	private double r;
+
+	public Sphere(Point point, double r) {
+		this.center = point;
 		this.r = r;
 	}
-	public int getX() {
-		return x;
+
+	public Sphere(double x, double y, double z, double r) {
+		this(new Point(x,y,z),r);
 	}
-	public void setX(int x) {
-		this.x = x;
+
+	public double getX() {
+		return center.getX();
 	}
-	public int getY() {
-		return y;
+	public double getY() {
+		return center.getY();
 	}
-	public void setY(int y) {
-		this.y = y;
+	public double getZ() {
+		return center.getZ();
 	}
-	public int getZ() {
-		return z;
-	}
-	public void setZ(int z) {
-		this.z = z;
-	}
-	public float getR() {
+	public double getR() {
 		return r;
 	}
-	public void setR(int r) {
-		this.r = r;
-	}
-	
-	
 }

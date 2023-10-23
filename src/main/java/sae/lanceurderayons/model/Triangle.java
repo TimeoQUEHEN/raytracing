@@ -1,35 +1,27 @@
 package sae.lanceurderayons.model;
 
 public class Triangle {
-    private int x,y,z;
+    private Point pX;
 
-    public Triangle(int x, int y, int z) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
+    private Point pY;
+
+    private Point pZ;
+
+    public Triangle(Point x, Point y, Point z) {
+        this.pX = x;
+        this.pY = y;
+        this.pZ = z;
     }
 
-    public int getX() {
-        return x;
+    public Point getX() {
+        return pX;
     }
 
-    public void setX(int x) {
-        this.x = x;
+    public Point getY() {
+        return pY;
     }
 
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    public int getZ() {
-        return z;
-    }
-
-    public void setZ(int z) {
-        this.z = z;
+    public Point getZ() {
+        return pZ;
     }
 }
