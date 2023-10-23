@@ -24,30 +24,30 @@ public class Vector {
     }
 
     public Triplet addition(Triplet triplet) {
-        return new Triplet(this.getDestination()+triplet.getX(),this.getDirection()+triplet.getY(),this.getNorm()+triplet.getZ());
+        return destDirNorm.addition(triplet);
     }
 
     public Triplet substraction(Triplet triplet) {
-        return new Triplet(this.getDestination()-triplet.getX(),this.getDirection()-triplet.getY(),this.getNorm()-triplet.getZ());
+        return destDirNorm.substraction(triplet);
     }
 
     public Triplet multiplyUsingAScalar(double d) {
-        return new Triplet(this.getDestination()*d,this.getDirection()*d,this.getNorm()*d);
+        return destDirNorm.multiplyUsingAScalar(d);
     }
 
     public Triplet scalarProduct(Triplet triplet) {
-        return new Triplet(this.getDestination()*triplet.getX(),this.getDirection()*triplet.getY(),this.getNorm()*triplet.getZ());
+        return destDirNorm.scalarProduct(triplet);
     }
 
     public Triplet vectorProduct(Triplet triplet) {
-        return new Triplet(this.getDirection()*triplet.getZ() - this.getNorm()*triplet.getY(), this.getNorm()*triplet.getX() - this.getDestination()*triplet.getZ(), this.getDestination()*triplet.getY() - this.getDirection()*triplet.getX());
+        return destDirNorm.vectorProduct(triplet);
     }
 
     public double length() {
-        return sqrt(pow(this.getDestination(),2)+pow(this.getDirection(),2)+pow(this.getNorm(),2));
+        return destDirNorm.length();
     }
 
     public Triplet norm() {
-        return multiplyUsingAScalar(1/length());
+        return destDirNorm.norm();
     }
 }
