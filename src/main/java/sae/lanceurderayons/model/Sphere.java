@@ -2,8 +2,8 @@ package sae.lanceurderayons.model;
 
 public class Sphere implements IElements {
 	private int x,y,z;
-	private float r;
-	public Sphere(int x, int y, int z, float r) {
+	private int r;
+	public Sphere(int x, int y, int z, int r) {
 		super();
 		this.x = x;
 		this.y = y;
@@ -31,7 +31,7 @@ public class Sphere implements IElements {
 	public float getR() {
 		return r;
 	}
-	public void setR(float r) {
+	public void setR(int r) {
 		this.r = r;
 	}
 	
