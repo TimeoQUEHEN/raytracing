@@ -1,8 +1,8 @@
 package sae.raytracing.model;
 
 public class Sphere implements IElements {
-	private Point center;
-	private double r;
+	private final Point center;
+	private final double r;
 
 	public Sphere(Point point, double r) {
 		this.center = point;
