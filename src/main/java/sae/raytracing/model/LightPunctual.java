@@ -1,7 +1,4 @@
-package sae.lanceurderayons.model;
-
-import java.awt.*;
-import java.util.Vector;
+package sae.raytracing.model;
 
 public class LightPunctual implements ILight {
     private Color color;

@@ -1,4 +1,4 @@
-package sae.lanceurderayons.model;
+package sae.raytracing.model;
 
 public class LightDirectional implements ILight {
     private Color color;
