@@ -1,7 +1,4 @@
-package sae.lanceurderayons.model;
-
-import static java.lang.Math.pow;
-import static java.lang.Math.sqrt;
+package sae.raytracing.model;
 
 public class Vector {
 

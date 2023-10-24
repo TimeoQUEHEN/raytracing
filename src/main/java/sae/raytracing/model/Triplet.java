@@ -1,4 +1,4 @@
-package sae.lanceurderayons.model;
+package sae.raytracing.model;
 
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
