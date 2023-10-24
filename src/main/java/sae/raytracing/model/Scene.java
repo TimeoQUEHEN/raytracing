@@ -1,5 +1,7 @@
 package sae.raytracing.model;
 
+import java.util.ArrayList;
+
 public class Scene {
     private int height;
     private int width;
@@ -7,7 +9,7 @@ public class Scene {
     private ILight[] lights;
     private IElements[] elements;
 
-    public Scene(int height, int width, Camera camera, ILight[] lights, IElements[] elements) {
+    public Scene(int height, int width, Camera camera, ArrayList<ILight> lights, ArrayList<IElements> elements) {
         this.height = height;
         this.width = width;
         this.camera = camera;

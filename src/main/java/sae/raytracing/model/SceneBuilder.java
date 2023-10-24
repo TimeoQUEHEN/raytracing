@@ -1,10 +1,15 @@
-package sae.lanceurderayons.model;
+package sae.raytracing.model;
+
+import java.sql.Array;
+import java.util.ArrayList;
 
 public class SceneBuilder implements IBuilder{
     private int height, width;
     private Camera camera;
-    private ILight[] lights;
-    private IElements[] elements;
+    private final ArrayList<ILight> lights = new ArrayList<ILight>(0);
+    private final ArrayList<IElements> elements = new ArrayList<IElements>(0);
+
+    // Implement Interface Methods
     @Override
     public void setDimensions(int height, int width) {
         this.height = height;
@@ -17,13 +22,13 @@ public class SceneBuilder implements IBuilder{
     }
 
     @Override
-    public void addLights(ILight[] lights) {
-        this.lights = lights;
+    public void addLights(ILight lights) {
+        this.lights.add(lights);
     }
 
     @Override
-    public void addElements(IElements[] elements) {
-        this.elements = elements;
+    public void addElements(IElements elements) {
+        this.elements.add(elements);
     }
 
     @Override
