@@ -8,6 +8,11 @@ public class Point {
         this.coords = new Triplet(x,y,z);
     }
 
+    @Override
+    public String toString() {
+        return getX()+", "+getY()+", "+getZ();
+    }
+
     public double getX(){
         return coords.getX();
     }
