@@ -1,6 +1,6 @@
 package sae.raytracing.model;
 
-public class Plane {
+public class Plane implements IElements {
     private Point point;
     private Vector vector;
 

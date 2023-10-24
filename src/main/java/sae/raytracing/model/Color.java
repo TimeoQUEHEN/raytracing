@@ -14,7 +14,7 @@ public class Color {
 
     @Override
     public String toString() {
-        return this.getRValue()+", "+getGValue()+", "+getBValue();
+        return getRValue()+", "+getGValue()+", "+getBValue();
     }
 
     public double getRValue() {

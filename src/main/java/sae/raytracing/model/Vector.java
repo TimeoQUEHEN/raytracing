@@ -12,16 +12,12 @@ public class Vector {
     }
 
     public Vector(Triplet triplet) {
-        this.destDirNorm=triplet;
-    }
-
-    public Triplet getTriplet() {
-        return this.destDirNorm;
+        this.destDirNorm = triplet;
     }
 
     @Override
     public String toString() {
-        return this.getDestination()+", "+getDirection()+", "+getNorm();
+        return getDestination()+", "+getDirection()+", "+getNorm();
     }
 
     public double getDestination() {
@@ -40,8 +36,8 @@ public class Vector {
         return destDirNorm.addition(triplet);
     }
 
-    protected Triplet subtraction(Triplet triplet) {
-        return destDirNorm.subtraction(triplet);
+    protected Triplet substraction(Triplet triplet) {
+        return destDirNorm.substraction(triplet);
     }
 
     protected Triplet multiplyUsingAScalar(double d) {
