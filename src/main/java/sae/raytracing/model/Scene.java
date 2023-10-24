@@ -1,13 +1,15 @@
 package sae.raytracing.model;
 
+import java.util.ArrayList;
+
 public class Scene {
     private int height;
     private int width;
     private Camera camera;
-    private ILight[] lights;
-    private IElements[] elements;
+    private ArrayList<ILight> lights;
+    private ArrayList<IElements> elements;
 
-    public Scene(int height, int width, Camera camera, ILight[] lights, IElements[] elements) {
+    public Scene(int height, int width, Camera camera, ArrayList<ILight> lights, ArrayList<IElements> elements) {
         this.height = height;
         this.width = width;
         this.camera = camera;
@@ -27,11 +29,11 @@ public class Scene {
         return camera;
     }
 
-    public ILight[] getLights() {
+    public ArrayList<ILight> getLights() {
         return lights;
     }
 
-    public IElements[] getElements() {
+    public ArrayList<IElements> getElements() {
         return elements;
     }
 }
