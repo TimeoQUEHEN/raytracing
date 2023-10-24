@@ -8,91 +8,99 @@ import java.util.SimpleTimeZone;
 
 public class Parser {
 
-    public boolean skipComment(String line){
-        if (line.charAt(0) != '#'){
-            return true;
-        }
-        return false;
-    }
-
-    public String[] elementGeoInformation(String nameFile){
+    public static Scene reader(File textFile){
         try {
-            File file=new File(nameFile);
-            Scanner sc=new Scanner(file);
-            while(sc.hasNextLine())
-            {
-                String line = sc.nextLine();
-                String[] tmp = line.split(" ");
-                if(skipComment(line) && (tmp[0].equals("tri") || tmp[0].equals("sphere"))){
-                    String[] res = new String[tmp.length-1];
-                    for (int i = 1; i < tmp.length; i++) {
-                        res[i-1] = tmp[i];
-                    }
-                    return res;
-                }
-            }
-            sc.close();
-        }catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
-        }
-        return new String[0];
-    }
-
-    public String[] keyWordInformation(String word, String nameFile){
-        try {
-            File file=new File(nameFile);
-            Scanner sc=new Scanner(file);
-            while(sc.hasNextLine())
-            {
-                String line = sc.nextLine();
-                String[] tmp = line.split(" ");
-                if(skipComment(line) && tmp[0].equals(word)){
-                    String[] res = new String[tmp.length-1];
-                    for (int i = 1; i < tmp.length; i++) {
-                        res[i-1] = tmp[i];
-                    }
-                    return res;
-                }
-
-            }
-            sc.close();
-        }catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
-        }
-        return new String[0];
-    }
-
-
-    public void reader(String nameFile){
-        try {
-            File file=new File(nameFile);
-            Scanner sc=new Scanner(file);
+            Scanner sc = new Scanner(textFile);
+            IBuilder builder = new SceneBuilder();
+            File imageFile;
+            Point[] points = new Point[0];
+            int index = 0;
             while(sc.hasNextLine()) {
                 String line = sc.nextLine();
                 if (line.charAt(0) != '#') {
                     String[] keyWord = line.split(" ");
+                    switch (keyWord[0]) {
+                        case "output" :
+                            imageFile = new File(System.getProperty("user.dir") + '/' + keyWord[1]);
+                            break;
+                        case "size" :
+                            builder.setDimensions(Integer.parseInt(keyWord[1]), Integer.parseInt(keyWord[2]));
+                            break;
+                        case "camera":
+                            builder.setCamera(new Camera(Double.parseDouble(keyWord[1]),
+                                    Double.parseDouble(keyWord[2]),
+                                    Double.parseDouble(keyWord[3]),
+                                    Double.parseDouble(keyWord[4]),
+                                    Double.parseDouble(keyWord[5]),
+                                    Double.parseDouble(keyWord[2]),
+                                    Double.parseDouble(keyWord[6]),
+                                    Double.parseDouble(keyWord[8]),
+                                    Double.parseDouble(keyWord[9]),
+                                    Double.parseDouble(keyWord[10])));
+                            break;
+                        case "directional" :
+                            builder.addLights(new LightDirectional(Double.parseDouble(keyWord[1]),
+                                    Double.parseDouble(keyWord[2]),
+                                    Double.parseDouble(keyWord[3]),
+                                    Double.parseDouble(keyWord[4]),
+                                    Double.parseDouble(keyWord[5]),
+                                    Double.parseDouble(keyWord[6])));
+                            break;
+                        case "point" :
+                            builder.addLights(new LightPunctual(Double.parseDouble(keyWord[1]),
+                                    Double.parseDouble(keyWord[2]),
+                                    Double.parseDouble(keyWord[3]),
+                                    Double.parseDouble(keyWord[4]),
+                                    Double.parseDouble(keyWord[5]),
+                                    Double.parseDouble(keyWord[6])));
+                            break;
+                        case "maxverts" :
+                            points = new Point[Integer.parseInt(keyWord[1])];
+                            break;
+                        case "vertex" :
+                            points[index++] = new Point(Double.parseDouble(keyWord[1]),
+                                    Double.parseDouble(keyWord[2]),
+                                    Double.parseDouble(keyWord[3]));
+                            break;
+                        case "tri" :
+                            builder.addElements(new Triangle(points[Integer.parseInt(keyWord[1])],
+                                    points[Integer.parseInt(keyWord[2])],
+                                    points[Integer.parseInt(keyWord[3])]));
+                            break;
+                        case "sphere" :
+                            builder.addElements(new Sphere(Double.parseDouble(keyWord[1]),
+                                    Double.parseDouble(keyWord[2]),
+                                    Double.parseDouble(keyWord[3]),
+                                    Double.parseDouble(keyWord[4])));
+                            break;
+                        case "plane" :
+                            builder.addElements(new Plane(Double.parseDouble(keyWord[1]),
+                                    Double.parseDouble(keyWord[2]),
+                                    Double.parseDouble(keyWord[3]),
+                                    Double.parseDouble(keyWord[4]),
+                                    Double.parseDouble(keyWord[5]),
+                                    Double.parseDouble(keyWord[6])));
+                            break;
+                        case "ambient" :
+                            // not implement yet
+                            break;
+                        case "diffuse" :
+                            // not implement yet
+                            break;
+                        case "specular" :
+                            // not implement yet
+                            break;
+                        case "shininess" :
+                            // not implement yet
+                            break;
+                    }
                 }
             }
-            String geo;
-            String[] size = keyWordInformation("size", nameFile);
-            String[] output = keyWordInformation("output", nameFile);
-            String[] camera = keyWordInformation("camera", nameFile);
-            String[] ambient = keyWordInformation("ambient", nameFile);
-            String[] geometry = elementGeoInformation(nameFile);
-            switch (geometry[0]){
-                case "tri":
-                    System.out.println("triangle");
-                    break;
-                case "sphere":
-                    System.out.println("sphere");
-                    break;
-                default:
-                    System.out.println("erreur");
-                    break;
-            }
             sc.close();
+            return builder.Scene();
         }catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
+            return null;
         }
     }
 }
