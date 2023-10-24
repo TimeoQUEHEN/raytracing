@@ -1,4 +1,4 @@
-package sae.lanceurderayons;
+package sae.raytracing;
 
 public class Main {
     public static void main(String[] args) {
