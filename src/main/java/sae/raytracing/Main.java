@@ -1,5 +1,8 @@
 package sae.raytracing;
 
+
+import sae.raytracing.model.Parser;
+
 import java.io.File;
 
 public class Main {
