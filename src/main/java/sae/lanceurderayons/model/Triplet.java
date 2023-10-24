@@ -17,6 +17,11 @@ public class Triplet {
         this.z=z;
     }
 
+    @Override
+    public String toString() {
+        return this.getX()+", "+getY()+", "+getZ();
+    }
+
     public double getX() {
         return x;
     }
@@ -33,7 +38,7 @@ public class Triplet {
         return new Triplet(this.x+triplet.getX(),this.y+triplet.getY(),this.z+triplet.getZ());
     }
 
-    protected Triplet substraction(Triplet triplet) {
+    protected Triplet subtraction(Triplet triplet) {
         return new Triplet(this.x-triplet.getX(),this.y-triplet.getY(),this.z-triplet.getZ());
     }
 

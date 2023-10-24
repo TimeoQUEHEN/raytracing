@@ -11,6 +11,19 @@ public class Vector {
         this.destDirNorm = new Triplet(destination,direction,norm);
     }
 
+    public Vector(Triplet triplet) {
+        this.destDirNorm=triplet;
+    }
+
+    public Triplet getTriplet() {
+        return this.destDirNorm;
+    }
+
+    @Override
+    public String toString() {
+        return this.getDestination()+", "+getDirection()+", "+getNorm();
+    }
+
     public double getDestination() {
         return this.destDirNorm.getX();
     }
@@ -27,8 +40,8 @@ public class Vector {
         return destDirNorm.addition(triplet);
     }
 
-    protected Triplet substraction(Triplet triplet) {
-        return destDirNorm.substraction(triplet);
+    protected Triplet subtraction(Triplet triplet) {
+        return destDirNorm.subtraction(triplet);
     }
 
     protected Triplet multiplyUsingAScalar(double d) {
