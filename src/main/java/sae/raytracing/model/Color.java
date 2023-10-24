@@ -1,4 +1,4 @@
-package sae.lanceurderayons.model;
+package sae.raytracing.model;
 
 public class Color {
 
@@ -10,6 +10,11 @@ public class Color {
         } catch (Exception e) {
             System.err.println("Saisie incorrecte : la somme des couleurs des sources de lumiére dépasse 1 sur une des composantes");
         }
+    }
+
+    @Override
+    public String toString() {
+        return getRValue()+", "+getGValue()+", "+getBValue();
     }
 
     public double getRValue() {

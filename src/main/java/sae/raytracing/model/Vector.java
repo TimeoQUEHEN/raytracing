@@ -1,4 +1,4 @@
-package sae.lanceurderayons.model;
+package sae.raytracing.model;
 
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
@@ -9,6 +9,15 @@ public class Vector {
 
     public Vector(double destination, double direction, double norm) {
         this.destDirNorm = new Triplet(destination,direction,norm);
+    }
+
+    public Vector(Triplet triplet) {
+        this.destDirNorm = triplet;
+    }
+
+    @Override
+    public String toString() {
+        return getDestination()+", "+getDirection()+", "+getNorm();
     }
 
     public double getDestination() {

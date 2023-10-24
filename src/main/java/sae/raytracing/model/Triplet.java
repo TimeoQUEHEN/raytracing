@@ -1,4 +1,4 @@
-package sae.lanceurderayons.model;
+package sae.raytracing.model;
 
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
@@ -15,6 +15,11 @@ public class Triplet {
         this.x=x;
         this.y=y;
         this.z=z;
+    }
+
+    @Override
+    public String toString() {
+        return getX()+", "+getY()+", "+getZ();
     }
 
     public double getX() {
@@ -60,4 +65,15 @@ public class Triplet {
     protected Triplet norm() {
         return multiplyUsingAScalar(1/length());
     }
+
+    /*public static void main(String[] args) {
+        Triplet t1 = new Triplet(3,4,5);
+        Triplet t2 = new Triplet(3,4,5);
+        System.out.println("addition : "+t1.addition(t2));
+        System.out.println("Scalar product : "+t1.scalarProduct(t2));
+        System.out.println("Vector product : "+t1.vectorProduct(t2));
+        System.out.println("Schurs Product : "+t1.schursProduct(t2));
+        System.out.println("Length : "+t1.length());
+        System.out.println("Norm : "+t1.norm());
+    }*/
 }
