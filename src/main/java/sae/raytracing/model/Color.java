@@ -12,6 +12,11 @@ public class Color {
         }
     }
 
+    @Override
+    public String toString() {
+        return getRValue()+", "+getGValue()+", "+getBValue();
+    }
+
     public double getRValue() {
         return this.rgb.getX();
     }

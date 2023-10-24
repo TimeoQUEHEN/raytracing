@@ -17,6 +17,11 @@ public class Triplet {
         this.z=z;
     }
 
+    @Override
+    public String toString() {
+        return getX()+", "+getY()+", "+getZ();
+    }
+
     public double getX() {
         return x;
     }
