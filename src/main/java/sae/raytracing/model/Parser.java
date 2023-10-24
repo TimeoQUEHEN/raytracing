@@ -8,11 +8,11 @@ import java.util.SimpleTimeZone;
 
 public class Parser {
 
-    public static Scene reader(File textFile){
+    public static void reader(File textFile){
         try {
             Scanner sc = new Scanner(textFile);
             IBuilder builder = new SceneBuilder();
-            File imageFile;
+            File imageFile = null;
             Point[] points = new Point[0];
             int index = 0;
             while(sc.hasNextLine()) {
@@ -97,10 +97,9 @@ public class Parser {
                 }
             }
             sc.close();
-            return builder.Scene();
+            RayTracing.generateImage(builder.Scene(), imageFile);
         }catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
-            return null;
         }
     }
 }
