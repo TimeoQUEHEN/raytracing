@@ -1,6 +1,6 @@
 package sae.raytracing.model;
 
-public class Triangle {
+public class Triangle implements IElements {
     private final Point pX;
 
     private final Point pY;
