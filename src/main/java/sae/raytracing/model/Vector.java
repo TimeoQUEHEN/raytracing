@@ -11,6 +11,15 @@ public class Vector {
         this.destDirNorm = new Triplet(destination,direction,norm);
     }
 
+    public Vector(Triplet triplet) {
+        this.destDirNorm = triplet;
+    }
+
+    @Override
+    public String toString() {
+        return getDestination()+", "+getDirection()+", "+getNorm();
+    }
+
     public double getDestination() {
         return this.destDirNorm.getX();
     }
