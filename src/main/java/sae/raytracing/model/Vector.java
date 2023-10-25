@@ -46,7 +46,7 @@ public class Vector {
         return destDirNorm.multiplyUsingAScalar(d);
     }
 
-    protected Triplet scalarProduct(Triplet triplet) {
+    protected double scalarProduct(Triplet triplet) {
         return destDirNorm.scalarProduct(triplet);
     }
 
