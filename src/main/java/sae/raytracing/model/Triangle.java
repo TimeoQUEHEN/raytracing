@@ -40,6 +40,11 @@ public class Triangle implements IElements {
     }
 
     @Override
+    public Vector getIntersectNorm(Point p) {
+        return null;
+    }
+
+    @Override
     public Color getDiffuse() {
         return diffuse;
     }

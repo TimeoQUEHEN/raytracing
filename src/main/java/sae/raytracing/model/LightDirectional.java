@@ -20,7 +20,7 @@ public class LightDirectional implements ILight {
 
     @Override
     public Vector getLdir(Point point) {
-        return vector;
+        return new Vector(vector.norm());
     }
 
     public Vector getVector() {

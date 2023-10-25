@@ -27,7 +27,8 @@ public class RayTracing {
                     if (mint >= 0) {
                         Point p = new Point(scene.getCamera().getLookFrom().getCoords().addition(d.multiplyUsingAScalar(mint)));
 
-                        rgb = scene.getAmbient().getIntRgb();
+                        IStrategy strategy = new LambertStrategy();
+                        rgb = strategy.model(scene,lastElement,p);
                     }
                     image.setRGB(line,column,rgb);
                 }

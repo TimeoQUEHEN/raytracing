@@ -4,12 +4,13 @@ public class LambertStrategy implements IStrategy{
 
     @Override
     public int model(Scene scene, IElements element, Point p) {
-        int ld = 0;
+        Triplet ld = new Triplet(0,0,0);
         Vector n = element.getIntersectNorm(p);
         for (ILight light : scene.getLights()) {
-            ld += Math.max(n.scalarProduct(light.getLdir(p).getDestDirNorm()),0) * light.getColor().getIntRgb();
+            ld = ld.addition(light.getColor().multiplyUsingAScalar(Math.max(n.scalarProduct(light.getLdir(p).getDestDirNorm()), 0)).schursProduct(element.getDiffuse().getRgb()));
         }
-        return scene.getAmbient().getIntRgb() + ld * element.getDiffuse().getIntRgb();
+        Color col = new Color(scene.getAmbient().addition(ld));
+        return col.getIntRgb();
         //Color la = scene.getAmbient();
         //return col.getIntRgb();
     }
