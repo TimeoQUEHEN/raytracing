@@ -14,6 +14,9 @@ public class Parser {
             File imageFile = null;
             Point[] points = new Point[0];
             int index = 0;
+            Color diffuse = null;
+            Color specular = null;
+            int shininess = 0;
             while(sc.hasNextLine()) {
                 String line = sc.nextLine();
                 if (line.charAt(0) != '#') {
@@ -81,19 +84,22 @@ public class Parser {
                                     Double.parseDouble(keyWord[6]), diffuse, specular, shininess));
                             break;
                         case "ambient" :
-                            // not implement yet
+                            builder.setAmbient(new Color(Double.parseDouble(keyWord[1]),
+                                    Double.parseDouble(keyWord[2]),
+                                    Double.parseDouble(keyWord[3])));
                             break;
                         case "diffuse" :
-                            // not implement yet
+                            diffuse = new Color(Double.parseDouble(keyWord[1]),
+                                    Double.parseDouble(keyWord[2]),
+                                    Double.parseDouble(keyWord[3]));
                             break;
                         case "specular" :
-                            // not implement yet
+                            specular = new Color(Double.parseDouble(keyWord[1]),
+                                    Double.parseDouble(keyWord[2]),
+                                    Double.parseDouble(keyWord[3]));
                             break;
                         case "shininess" :
-                            // not implement yet
-                            break;
-                        case "shadow":
-                            // not implement yet
+                            shininess = Integer.parseInt(keyWord[1]);
                             break;
                     }
                 }
