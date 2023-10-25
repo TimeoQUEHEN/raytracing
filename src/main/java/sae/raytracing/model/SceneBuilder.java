@@ -1,13 +1,14 @@
 package sae.raytracing.model;
 
+import java.sql.Array;
 import java.util.ArrayList;
 
 public class SceneBuilder implements IBuilder{
     private int height, width;
     private Camera camera;
+    private final ArrayList<ILight> lights = new ArrayList<>(0);
+    private final ArrayList<IElements> elements = new ArrayList<>(0);
     private Color ambient;
-    private final ArrayList<ILight> lights = new ArrayList<ILight>(0);
-    private final ArrayList<IElements> elements = new ArrayList<IElements>(0);
 
     // Implement Interface Methods
     @Override
