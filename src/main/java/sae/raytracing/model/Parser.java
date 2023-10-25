@@ -12,6 +12,7 @@ public class Parser {
         try {
             Scanner sc = new Scanner(textFile);
             IBuilder builder = new SceneBuilder();
+            builder.setAmbient(new Color(0,0,0));
             File imageFile = null;
             Point[] points = new Point[0];
             int index = 0;
