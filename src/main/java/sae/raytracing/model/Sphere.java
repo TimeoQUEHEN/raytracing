@@ -6,13 +6,22 @@ public class Sphere implements IElements {
 	private final Point center;
 	private final double r;
 
-	public Sphere(Point point, double r) {
+	private final Color diffuse;
+
+	private final Color specular;
+
+	private final int shininess;
+
+	public Sphere(Point point, double r, Color diffuse, Color specular, int shininess) {
 		this.center = point;
 		this.r = r;
+		this.diffuse = diffuse;
+		this.specular = specular;
+		this.shininess = shininess;
 	}
 
-	public Sphere(double x, double y, double z, double r) {
-		this(new Point(x,y,z),r);
+	public Sphere(double x, double y, double z, double r, Color diffuse, Color specular, int shininess) {
+		this(new Point(x,y,z),r, diffuse, specular, shininess);
 	}
 
 	public double getX() {
@@ -31,6 +40,7 @@ public class Sphere implements IElements {
 		return r;
 	}
 
+	@Override
 	public double getIntersection(Vector d, Camera cam) {
 		Point eye = cam.getLookFrom();
 		Point cc = this.center;
@@ -51,5 +61,20 @@ public class Sphere implements IElements {
 				return t2;
 			}
 		}
+	}
+
+	@Override
+	public Color getDiffuse() {
+		return diffuse;
+	}
+
+	@Override
+	public Color getSpecular() {
+		return specular;
+	}
+
+	@Override
+	public int getShininess() {
+		return shininess;
 	}
 }
