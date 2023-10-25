@@ -53,10 +53,10 @@ public class Sphere implements IElements {
 			return -1;
 		} else {
 			if (delta == 0) {
-				return -b/2*a;
+				return -b/(2*a);
 			} else {
-				double t1 = (-b+sqrt(delta))/2*a;
-				double t2 = (-b-sqrt(delta))/2*a;
+				double t1 = (-b+sqrt(delta))/(2*a);
+				double t2 = (-b-sqrt(delta))/(2*a);
 				if (t2 < 0) {return t1;}
 				return t2;
 			}

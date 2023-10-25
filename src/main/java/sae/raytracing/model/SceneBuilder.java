@@ -5,13 +5,13 @@ import java.util.ArrayList;
 public class SceneBuilder implements IBuilder{
     private int height, width;
     private Camera camera;
+    private final ArrayList<ILight> lights = new ArrayList<>(0);
+    private final ArrayList<IElements> elements = new ArrayList<>(0);
     private Color ambient;
-    private final ArrayList<ILight> lights = new ArrayList<ILight>(0);
-    private final ArrayList<IElements> elements = new ArrayList<IElements>(0);
 
     // Implement Interface Methods
     @Override
-    public void setDimensions(int height, int width) {
+    public void setDimensions(int width, int height) {
         this.height = height;
         this.width = width;
     }
@@ -36,6 +36,6 @@ public class SceneBuilder implements IBuilder{
 
     @Override
     public Scene Scene() {
-        return new Scene(this.height,this.width,this.camera,this.ambient,this.lights,this.elements);
+        return new Scene(this.width,this.height,this.camera,this.ambient,this.lights,this.elements);
     }
 }

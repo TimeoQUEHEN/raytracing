@@ -1,7 +1,7 @@
 package sae.raytracing.model;
 
 public interface IBuilder {
-    void setDimensions(int height, int width);
+    void setDimensions( int width, int height);
     void setCamera(Camera camera);
     void setAmbient(Color color);
     void addLights(ILight lights);
