@@ -32,6 +32,8 @@ public class Vector {
         return this.destDirNorm.getZ();
     }
 
+    public Triplet getDestDirNorm() { return this.destDirNorm; }
+
     protected Triplet addition(Triplet triplet) {
         return destDirNorm.addition(triplet);
     }

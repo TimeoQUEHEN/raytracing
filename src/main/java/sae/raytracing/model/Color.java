@@ -29,6 +29,8 @@ public class Color {
         return this.rgb.getZ();
     }
 
+    public Triplet getRgb() { return this.rgb; }
+
     protected Triplet addition(Triplet triplet) {
         return rgb.addition(triplet);
     }

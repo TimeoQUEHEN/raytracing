@@ -29,6 +29,8 @@ public class Point {
         return coords.getZ();
     }
 
+    public Triplet getCoords() { return this.coords; }
+
     protected Triplet substraction(Triplet triplet) {
         return coords.substraction(triplet);
     }
