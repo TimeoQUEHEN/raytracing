@@ -6,7 +6,7 @@ plugins {
   id 'org.beryx.jlink' version '2.25.0'
 }
 
-group 'com.example'
+group 'sae.raytracing'
 version '1.0-SNAPSHOT'
 
 repositories {
@@ -20,18 +20,17 @@ ext {
 sourceCompatibility = '17'
 targetCompatibility = '17'
 
-tasks.withType(JavaCompile) {
+tasks.withType(JavaCompile).configureEach {
   options.encoding = 'UTF-8'
 }
 
 application {
-  mainModule = 'com.example.lanceurderayons'
-  mainClass = 'com.example.lanceurderayons.HelloApplication'
+  mainModule = 'sae.raytracing'
+  mainClass = 'sae.raytracing.Main'
 }
 
-javafx {
+java {
   version = '17.0.6'
-  modules = ['javafx.controls', 'javafx.fxml']
 }
 
 dependencies {
@@ -42,8 +41,3 @@ dependencies {
 
 test {
   useJUnitPlatform()  }
-
-
-jlinkZip {
-  group = 'distribution'
-}
