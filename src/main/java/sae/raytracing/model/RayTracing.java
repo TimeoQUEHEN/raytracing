@@ -21,7 +21,7 @@ public class RayTracing {
                         }
                     }
                     int rgb = 0;
-                    if (t >= 0) {
+                    if (mint >= 0) {
                         Point p = new Point(scene.getCamera().getLookFrom().getCoords().addition(d.multiplyUsingAScalar(mint)));
                         rgb = scene.getAmbient().getIntRgb();
                     }

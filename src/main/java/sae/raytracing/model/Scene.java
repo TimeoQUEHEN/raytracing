@@ -10,10 +10,11 @@ public class Scene {
     private ArrayList<ILight> lights;
     private ArrayList<IElements> elements;
 
-    public Scene(int height, int width, Camera camera, Color ambient, ArrayList<ILight> lights, ArrayList<IElements> elements) {
+    public Scene(int width, int height, Camera camera, Color ambient, ArrayList<ILight> lights, ArrayList<IElements> elements) {
         this.height = height;
         this.width = width;
         this.camera = camera;
+        this.ambient = ambient;
         this.lights = lights;
         this.elements = elements;
     }

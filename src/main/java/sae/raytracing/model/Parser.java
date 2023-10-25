@@ -3,6 +3,7 @@ package sae.raytracing.model;
 import java.io.File;
 
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Parser {
@@ -19,8 +20,9 @@ public class Parser {
             int shininess = 0;
             while(sc.hasNextLine()) {
                 String line = sc.nextLine();
-                if (line.charAt(0) != '#') {
+                if (! line.isEmpty() && line.charAt(0) != '#') {
                     String[] keyWord = line.split(" ");
+                    System.out.println(Arrays.toString(keyWord));
                     switch (keyWord[0]) {
                         case "output" :
                             imageFile = new File(System.getProperty("user.dir") + '/' + keyWord[1]);

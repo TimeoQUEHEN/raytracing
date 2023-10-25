@@ -1,6 +1,5 @@
 package sae.raytracing.model;
 
-import java.sql.Array;
 import java.util.ArrayList;
 
 public class SceneBuilder implements IBuilder{
@@ -12,7 +11,7 @@ public class SceneBuilder implements IBuilder{
 
     // Implement Interface Methods
     @Override
-    public void setDimensions(int height, int width) {
+    public void setDimensions(int width, int height) {
         this.height = height;
         this.width = width;
     }
@@ -37,6 +36,6 @@ public class SceneBuilder implements IBuilder{
 
     @Override
     public Scene Scene() {
-        return new Scene(this.height,this.width,this.camera,this.ambient,this.lights,this.elements);
+        return new Scene(this.width,this.height,this.camera,this.ambient,this.lights,this.elements);
     }
 }
