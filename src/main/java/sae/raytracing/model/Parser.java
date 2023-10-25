@@ -4,7 +4,6 @@ import java.io.File;
 
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-import java.util.SimpleTimeZone;
 
 public class Parser {
 
@@ -65,13 +64,13 @@ public class Parser {
                         case "tri" :
                             builder.addElements(new Triangle(points[Integer.parseInt(keyWord[1])],
                                     points[Integer.parseInt(keyWord[2])],
-                                    points[Integer.parseInt(keyWord[3])]));
+                                    points[Integer.parseInt(keyWord[3])], diffuse, specular, shininess));
                             break;
                         case "sphere" :
                             builder.addElements(new Sphere(Double.parseDouble(keyWord[1]),
                                     Double.parseDouble(keyWord[2]),
                                     Double.parseDouble(keyWord[3]),
-                                    Double.parseDouble(keyWord[4])));
+                                    Double.parseDouble(keyWord[4]), diffuse, specular, shininess));
                             break;
                         case "plane" :
                             builder.addElements(new Plane(Double.parseDouble(keyWord[1]),
@@ -79,7 +78,7 @@ public class Parser {
                                     Double.parseDouble(keyWord[3]),
                                     Double.parseDouble(keyWord[4]),
                                     Double.parseDouble(keyWord[5]),
-                                    Double.parseDouble(keyWord[6])));
+                                    Double.parseDouble(keyWord[6]), diffuse, specular, shininess));
                             break;
                         case "ambient" :
                             // not implement yet
@@ -91,6 +90,9 @@ public class Parser {
                             // not implement yet
                             break;
                         case "shininess" :
+                            // not implement yet
+                            break;
+                        case "shadow":
                             // not implement yet
                             break;
                     }
