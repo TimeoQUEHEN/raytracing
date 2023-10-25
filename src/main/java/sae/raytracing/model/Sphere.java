@@ -40,6 +40,7 @@ public class Sphere implements IElements {
 		return r;
 	}
 
+	@Override
 	public double getIntersection(Vector d, Camera cam) {
 		Point eye = cam.getLookFrom();
 		Point cc = this.center;
@@ -60,8 +61,6 @@ public class Sphere implements IElements {
 				return t2;
 			}
 		}
-
-		return 0;
 	}
 
 	@Override

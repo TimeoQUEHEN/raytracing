@@ -1,7 +1,7 @@
 package sae.raytracing.model;
 
 public interface IElements {
-    public double getIntersection(Vector d, Point p);
+    public double getIntersection(Vector d, Camera cam);
 
     public Color getDiffuse();
 

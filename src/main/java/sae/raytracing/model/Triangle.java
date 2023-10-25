@@ -35,7 +35,7 @@ public class Triangle implements IElements {
     }
 
     @Override
-    public double getIntersection(Vector d, Point p) {
+    public double getIntersection(Vector d, Camera cam) {
         return 0;
     }
 
