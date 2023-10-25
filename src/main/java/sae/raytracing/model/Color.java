@@ -31,6 +31,10 @@ public class Color {
 
     public Triplet getRgb() { return this.rgb; }
 
+    public int getIntRgb() {
+        return ( (int) rgb.getX() * 255) * 35536 + ( (int) rgb.getY() * 255) * 256 + ( (int) rgb.getZ() * 255);
+    }
+
     protected Triplet addition(Triplet triplet) {
         return rgb.addition(triplet);
     }

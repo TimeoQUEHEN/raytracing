@@ -45,8 +45,8 @@ public class Sphere implements IElements {
 		Point eye = cam.getLookFrom();
 		Point cc = this.center;
 		double a = 1 ;
-		double b = 2*(eye.substraction(cc.getCoords()))*d;
-		double c =(eye.substraction(cc.getCoords()))*(eye.substraction(cc.getCoords()))-(r*r);
+		double b = eye.substraction(cc.getCoords()).scalarProduct(d.getDestDirNorm()) * 2;
+		double c = eye.substraction(cc.getCoords()).scalarProduct(eye.substraction(cc.getCoords()))-(r*r);
 
 		double delta = b*b-4*a*c;
 		if (delta < 0) {

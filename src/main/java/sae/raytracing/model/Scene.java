@@ -6,10 +6,11 @@ public class Scene {
     private int height;
     private int width;
     private Camera camera;
+    private Color ambient;
     private ArrayList<ILight> lights;
     private ArrayList<IElements> elements;
 
-    public Scene(int height, int width, Camera camera, ArrayList<ILight> lights, ArrayList<IElements> elements) {
+    public Scene(int height, int width, Camera camera, Color ambient, ArrayList<ILight> lights, ArrayList<IElements> elements) {
         this.height = height;
         this.width = width;
         this.camera = camera;
@@ -28,6 +29,8 @@ public class Scene {
     public Camera getCamera() {
         return camera;
     }
+
+    public Color getAmbient() { return ambient; }
 
     public ArrayList<ILight> getLights() {
         return lights;

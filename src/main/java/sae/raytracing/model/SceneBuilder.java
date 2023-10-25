@@ -1,11 +1,11 @@
 package sae.raytracing.model;
 
-import java.sql.Array;
 import java.util.ArrayList;
 
 public class SceneBuilder implements IBuilder{
     private int height, width;
     private Camera camera;
+    private Color ambient;
     private final ArrayList<ILight> lights = new ArrayList<ILight>(0);
     private final ArrayList<IElements> elements = new ArrayList<IElements>(0);
 
@@ -22,6 +22,9 @@ public class SceneBuilder implements IBuilder{
     }
 
     @Override
+    public void setAmbient(Color color) { this.ambient = color; }
+
+    @Override
     public void addLights(ILight lights) {
         this.lights.add(lights);
     }
@@ -33,6 +36,6 @@ public class SceneBuilder implements IBuilder{
 
     @Override
     public Scene Scene() {
-        return new Scene(this.height,this.width,this.camera,this.lights,this.elements);
+        return new Scene(this.height,this.width,this.camera,this.ambient,this.lights,this.elements);
     }
 }

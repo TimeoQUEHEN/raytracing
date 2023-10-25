@@ -46,8 +46,8 @@ public class Triplet {
         return new Triplet(this.x*d,this.y*d,this.z*d);
     }
 
-    protected Triplet scalarProduct(Triplet triplet) {
-        return new Triplet(this.x*triplet.getX(),this.y*triplet.getY(),this.z*triplet.getZ());
+    protected double scalarProduct(Triplet triplet) {
+        return this.x*triplet.getX() + this.y*triplet.getY() + this.z*triplet.getZ();
     }
 
     protected Triplet vectorProduct(Triplet triplet) {
