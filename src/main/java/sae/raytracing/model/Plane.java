@@ -40,7 +40,12 @@ public class Plane implements IElements {
         return q.substraction(eye.getCoords()).scalarProduct(n.getDestDirNorm())/d.scalarProduct(n.getDestDirNorm());
         // Priority calculating with +t * -> d
         // Triplet p = (eye.getCoords().addition(d.multiplyUsingAScalar(t)));
+    }
 
+    // TODO getIntersectNorm
+    @Override
+    public Vector getIntersectNorm(Point p) {
+        return null;
     }
 
     @Override
