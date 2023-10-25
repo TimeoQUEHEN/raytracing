@@ -10,7 +10,6 @@ public class Triangle implements IElements {
     private final Color diffuse;
 
     private final Color specular;
-
     private final int shininess;
 
     public Triangle(Point x, Point y, Point z, Color diffuse, Color specular, int shininess) {
@@ -47,6 +46,12 @@ public class Triangle implements IElements {
                 n.scalarProduct((a.getCoords().substraction(this.pZ.getCoords())).vectorProduct(p.substraction(this.pZ.getCoords()))) >= 0){
             return t;
         } else {return -1;}
+    }
+
+    // TODO getIntersectNorm
+    @Override
+    public Vector getIntersectNorm(Point p) {
+        return null;
     }
 
     @Override
