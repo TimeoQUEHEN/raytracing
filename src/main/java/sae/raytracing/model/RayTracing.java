@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class RayTracing {
+
     public static void generateImage(Scene scene, File outputfile) {
         try {
             BufferedImage image = new BufferedImage(scene.getWidth(), scene.getHeight(), BufferedImage.TYPE_INT_RGB);
@@ -14,15 +15,18 @@ public class RayTracing {
                     Vector d = getDistance(scene, line ,column);
                     double mint = -1;
                     double t = -1;
+                    IElements lastElement = null;
                     for (IElements element : scene.getElements()) {
                         t = element.getIntersection(d, scene.getCamera());
                         if (t >= 0 && (mint < 0 || t < mint)) {
                             mint = t;
+                            lastElement = element;
                         }
                     }
                     int rgb = 0;
-                    if (t >= 0) {
+                    if (mint >= 0) {
                         Point p = new Point(scene.getCamera().getLookFrom().getCoords().addition(d.multiplyUsingAScalar(mint)));
+
                         rgb = scene.getAmbient().getIntRgb();
                     }
                     image.setRGB(line,column,rgb);

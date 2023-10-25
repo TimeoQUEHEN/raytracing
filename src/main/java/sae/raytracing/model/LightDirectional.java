@@ -18,6 +18,11 @@ public class LightDirectional implements ILight {
         return this.color;
     }
 
+    @Override
+    public Vector getLdir(Point point) {
+        return vector;
+    }
+
     public Vector getVector() {
         return this.vector;
     }

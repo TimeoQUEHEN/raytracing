@@ -18,6 +18,11 @@ public class LightPunctual implements ILight {
         return this.color;
     }
 
+    @Override
+    public Vector getLdir(Point p) {
+        return new Vector(point.substraction(p.getCoords()).norm());
+    }
+
     public Point getPoint() {
         return this.point;
     }

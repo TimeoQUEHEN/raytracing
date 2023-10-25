@@ -36,7 +36,7 @@ public class Triangle implements IElements {
 
     @Override
     public double getIntersection(Vector d, Camera cam) {
-        return 0;
+        throw new UnsupportedOperationException();
     }
 
     @Override

@@ -64,6 +64,11 @@ public class Sphere implements IElements {
 	}
 
 	@Override
+	public Vector getIntersectNorm(Point p) {
+		return new Vector(p.substraction(this.center.getCoords()).norm());
+	}
+
+	@Override
 	public Color getDiffuse() {
 		return diffuse;
 	}
