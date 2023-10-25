@@ -12,6 +12,10 @@ public class Color {
         }
     }
 
+    public Color(Triplet rgb) {
+        this.rgb = rgb;
+    }
+
     @Override
     public String toString() {
         return getRValue()+", "+getGValue()+", "+getBValue();

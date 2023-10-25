@@ -37,9 +37,10 @@ public class Plane implements IElements {
         Point eye = cam.getLookFrom();
         Point q = this.point;
         Vector n = this.vector;
-        double t = q.substraction(eye.getCoords()).scalarProduct(n.getDestDirNorm())/d.scalarProduct(n.getDestDirNorm());
+        return q.substraction(eye.getCoords()).scalarProduct(n.getDestDirNorm())/d.scalarProduct(n.getDestDirNorm());
         // Priority calculating with +t * -> d
-        return (eye.substraction(q.getCoords()).scalarProduct(n.getDestDirNorm()) + t) * (d.scalarProduct(n.getDestDirNorm()));
+        // Triplet p = (eye.getCoords().addition(d.multiplyUsingAScalar(t)));
+
     }
 
     @Override
