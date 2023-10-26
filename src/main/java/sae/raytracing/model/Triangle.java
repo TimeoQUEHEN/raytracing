@@ -37,7 +37,7 @@ public class Triangle implements IElements {
     public double getIntersection(Vector d, Camera cam) {
         Point eye = cam.getLookFrom();
         Point a = this.pX;
-        Vector n = new Vector((this.pY.substraction(a.getCoords())).vectorProduct(this.pZ.substraction(a.getCoords())).norm());
+        Vector n = getIntersectNorm(null);
         double t = a.substraction(eye.getCoords()).scalarProduct(n.getDestDirNorm())/d.scalarProduct(n.getDestDirNorm());
         Triplet p = eye.getCoords().addition(d.multiplyUsingAScalar(t));
 
@@ -48,10 +48,10 @@ public class Triangle implements IElements {
         } else {return -1;}
     }
 
-    // TODO getIntersectNorm
+
     @Override
     public Vector getIntersectNorm(Point p) {
-        return null;
+        return new Vector((this.pY.substraction(this.pX.getCoords())).vectorProduct(this.pZ.substraction(this.pX.getCoords())).norm());
     }
 
     @Override

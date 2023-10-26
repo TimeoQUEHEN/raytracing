@@ -1,5 +1,7 @@
 package sae.raytracing.model;
 
+import java.awt.*;
+
 import static java.lang.Math.sqrt;
 
 public class Plane implements IElements {
@@ -36,16 +38,13 @@ public class Plane implements IElements {
     public double getIntersection(Vector d, Camera cam) {
         Point eye = cam.getLookFrom();
         Point q = this.point;
-        Vector n = this.vector;
+        Vector n = getIntersectNorm(null);
         return q.substraction(eye.getCoords()).scalarProduct(n.getDestDirNorm())/d.scalarProduct(n.getDestDirNorm());
-        // Priority calculating with +t * -> d
-        // Triplet p = (eye.getCoords().addition(d.multiplyUsingAScalar(t)));
     }
 
-    // TODO getIntersectNorm
     @Override
     public Vector getIntersectNorm(Point p) {
-        return null;
+        return this.vector;
     }
 
     @Override
