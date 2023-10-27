@@ -5,7 +5,7 @@ public interface IBuilder {
     void setCamera(Camera camera);
     void setAmbient(Color color);
     void setShadow(boolean shadow);
-    void setMaxDepth();
+    void setMaxDepth(int maxDepth);
     void addLights(ILight lights);
     void addElements(IElements elements);
     Scene Scene();
