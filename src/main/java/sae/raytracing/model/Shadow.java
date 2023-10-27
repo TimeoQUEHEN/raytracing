@@ -10,11 +10,9 @@ public class Shadow implements IStrategy {
 
     @Override
     public Color model(Scene scene, IElements element, Point p, Vector d, ILight light) {
-        Vector ldir = light.getLdir(p);
-        Vector ldirReverse = new Vector(ldir.getDestination(), ldir.getDirection(), ldir.getNorm());
         double t = -1;
         for (IElements elementScene : scene.getElements()) {
-            t = elementScene.getIntersection(ldirReverse, p);
+            t = elementScene.getIntersection(light.getLdir(p), p);
             if (! element.equals(elementScene) && t > 0) {
                 return new Color(0,0,0);
             }
