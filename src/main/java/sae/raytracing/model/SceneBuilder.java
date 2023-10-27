@@ -8,6 +8,7 @@ public class SceneBuilder implements IBuilder{
     private final ArrayList<ILight> lights = new ArrayList<>(0);
     private final ArrayList<IElements> elements = new ArrayList<>(0);
     private Color ambient;
+    private boolean shadow;
 
     // Implement Interface Methods
     @Override
@@ -25,6 +26,11 @@ public class SceneBuilder implements IBuilder{
     public void setAmbient(Color color) { this.ambient = color; }
 
     @Override
+    public void setShadow(boolean shadow) {
+        this.shadow = shadow;
+    }
+
+    @Override
     public void addLights(ILight lights) {
         this.lights.add(lights);
     }
@@ -36,6 +42,6 @@ public class SceneBuilder implements IBuilder{
 
     @Override
     public Scene Scene() {
-        return new Scene(this.width,this.height,this.camera,this.ambient,this.lights,this.elements);
+        return new Scene(this.width,this.height,this.camera,this.ambient,this.shadow,this.lights,this.elements);
     }
 }
