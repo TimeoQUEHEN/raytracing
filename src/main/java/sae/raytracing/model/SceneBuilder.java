@@ -48,6 +48,6 @@ public class SceneBuilder implements IBuilder{
 
     @Override
     public Scene Scene() {
-        return new Scene(this.width,this.height,this.camera,this.ambient,this.shadow,this.lights,this.elements);
+        return new Scene(this.width,this.height,this.camera,this.ambient,this.shadow,this.maxDepth,this.lights,this.elements);
     }
 }
