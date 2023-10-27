@@ -20,6 +20,7 @@ public class Parser {
             Color diffuse = null;
             Color specular = null;
             int shininess = 0;
+            int maxDepth = 0;
             while(sc.hasNextLine()) {
                 String line = sc.nextLine();
                 if (! line.isEmpty() && line.charAt(0) != '#') {
@@ -106,6 +107,8 @@ public class Parser {
                             break;
                         case "shadow" :
                             builder.setShadow(Boolean.parseBoolean(keyWord[1]));
+                        case "maxdepth" :
+                            builder.setMaxDepth(Integer.parseInt(keyWord[1]));
                     }
                 }
             }
