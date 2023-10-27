@@ -107,8 +107,10 @@ public class Parser {
                             break;
                         case "shadow" :
                             builder.setShadow(Boolean.parseBoolean(keyWord[1]));
+                            break;
                         case "maxdepth" :
                             builder.setMaxDepth(Integer.parseInt(keyWord[1]));
+                            break;
                     }
                 }
             }
