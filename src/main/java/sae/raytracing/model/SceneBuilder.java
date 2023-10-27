@@ -9,6 +9,7 @@ public class SceneBuilder implements IBuilder{
     private final ArrayList<IElements> elements = new ArrayList<>(0);
     private Color ambient;
     private boolean shadow;
+    private int maxDepth;
 
     // Implement Interface Methods
     @Override
@@ -31,6 +32,11 @@ public class SceneBuilder implements IBuilder{
     }
 
     @Override
+    public void setMaxDepth(int maxDepth) {
+        this.maxDepth = maxDepth;
+    }
+
+    @Override
     public void addLights(ILight lights) {
         this.lights.add(lights);
     }
@@ -42,6 +48,6 @@ public class SceneBuilder implements IBuilder{
 
     @Override
     public Scene Scene() {
-        return new Scene(this.width,this.height,this.camera,this.ambient,this.shadow,this.lights,this.elements);
+        return new Scene(this.width,this.height,this.camera,this.ambient,this.shadow,this.maxDepth,this.lights,this.elements);
     }
 }
