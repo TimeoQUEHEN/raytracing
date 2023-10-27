@@ -19,11 +19,11 @@ public class Parser {
             int index = 0;
             Color diffuse = null;
             Color specular = null;
-            int shininess = 0;
+            int shininess = 1;
             while(sc.hasNextLine()) {
                 String line = sc.nextLine();
                 if (! line.isEmpty() && line.charAt(0) != '#') {
-                    String[] keyWord = line.split(" ");
+                    String[] keyWord = line.split("\\s+");
                     switch (keyWord[0]) {
                         case "output" :
                             imageFile = new File(System.getProperty("user.dir") + '/' + keyWord[1]);
