@@ -13,6 +13,7 @@ public class Parser {
             Scanner sc = new Scanner(textFile);
             IBuilder builder = new SceneBuilder();
             builder.setAmbient(new Color(0,0,0));
+            builder.setShadow(false);
             File imageFile = null;
             Point[] points = new Point[0];
             int index = 0;
@@ -23,7 +24,6 @@ public class Parser {
                 String line = sc.nextLine();
                 if (! line.isEmpty() && line.charAt(0) != '#') {
                     String[] keyWord = line.split(" ");
-                    System.out.println(Arrays.toString(keyWord));
                     switch (keyWord[0]) {
                         case "output" :
                             imageFile = new File(System.getProperty("user.dir") + '/' + keyWord[1]);
@@ -37,8 +37,8 @@ public class Parser {
                                     Double.parseDouble(keyWord[3]),
                                     Double.parseDouble(keyWord[4]),
                                     Double.parseDouble(keyWord[5]),
-                                    Double.parseDouble(keyWord[2]),
                                     Double.parseDouble(keyWord[6]),
+                                    Double.parseDouble(keyWord[7]),
                                     Double.parseDouble(keyWord[8]),
                                     Double.parseDouble(keyWord[9]),
                                     Double.parseDouble(keyWord[10])));
@@ -104,6 +104,8 @@ public class Parser {
                         case "shininess" :
                             shininess = Integer.parseInt(keyWord[1]);
                             break;
+                        case "shadow" :
+                            builder.setShadow(Boolean.parseBoolean(keyWord[1]));
                     }
                 }
             }

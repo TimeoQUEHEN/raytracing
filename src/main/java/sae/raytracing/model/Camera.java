@@ -13,8 +13,8 @@ public class Camera {
         this.fov = fov;
     }
 
-    public Camera(double x1, double y1, double z1, double x2, double y2, double z2, double x3, double y3, double z3, double fov) {
-        this(new Point(x1,y1,z1), new Point(x2,y2,z2), new Vector(x3,y3,z3) ,fov);
+    public Camera(double x, double y, double z, double u, double v, double w, double m, double n, double o, double fov) {
+        this(new Point(x,y,z), new Point(u,v,w), new Vector(m,n,o) ,fov);
     }
 
     public Point getLookFrom() {

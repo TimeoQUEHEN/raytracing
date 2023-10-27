@@ -41,8 +41,7 @@ public class Sphere implements IElements {
 	}
 
 	@Override
-	public double getIntersection(Vector d, Camera cam) {
-		Point eye = cam.getLookFrom();
+	public double getIntersection(Vector d, Point eye) {
 		Point cc = this.center;
 		double a = 1 ;
 		double b = eye.substraction(cc.getCoords()).scalarProduct(d.getDestDirNorm()) * 2;
