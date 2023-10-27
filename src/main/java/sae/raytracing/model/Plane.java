@@ -35,8 +35,7 @@ public class Plane implements IElements {
     }
 
     @Override
-    public double getIntersection(Vector d, Camera cam) {
-        Point eye = cam.getLookFrom();
+    public double getIntersection(Vector d, Point eye) {
         Point q = this.point;
         Vector n = getIntersectNorm(null);
         return q.substraction(eye.getCoords()).scalarProduct(n.getDestDirNorm())/d.scalarProduct(n.getDestDirNorm());
