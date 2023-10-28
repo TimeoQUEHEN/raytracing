@@ -47,15 +47,8 @@ public class RayTracing {
                     int rgb = 0;
                     if (mint >= 0) {
                         Point p = new Point(scene.getCamera().getLookFrom().getCoords().addition(d.multiplyUsingAScalar(mint)));
-                        Color col = new Color(0,0,0);
-                        if (strategy instanceof BaseStrategy) {
-                            col = strategy.model(scene,lastElement,p,d,null);
-                        } else {
-                            for (ILight light : scene.getLights()) {
-                                col = new Color(col.addition(strategy.model(scene,lastElement,p,d,light).getRgb()));
-                            }
-                        }
-                        rgb = col.getIntRgb();
+                        /*rgb = lastElement.getColor(scene, p, d, strategy).getIntRgb();*/
+                        rgb = calculateColor(scene,p,d,strategy,lastElement,1).getIntRgb();
                     }
                     image.setRGB(line,column,rgb);
                 }
@@ -64,5 +57,33 @@ public class RayTracing {
             } catch (IOException e) {
                 System.err.println("Error");
             }
+    }
+
+    public static Color calculateColor(Scene scene, Point p, Vector d, IStrategy strategy, IElements element,int depth) {
+        Color c = new Color(0,0,0);
+        for (ILight light : scene.getLights()) {
+            c = new Color(c.addition(strategy.model(scene,element,p,d,light).getRgb()));
+        }
+        if (depth < scene.getMaxDepth() && element.getSpecular().getIntRgb() > 0) {
+            Vector n = element.getIntersectNorm(p);
+            Vector r = new Vector(d.addition(n.multiplyUsingAScalar(2 * n.scalarProduct(d.multiplyUsingAScalar(-1)))));
+            double mint = -1;
+            double t = -1;
+            IElements lastElement = null;
+            for (IElements elementScene : scene.getElements()) {
+                t = elementScene.getIntersection(r, p);
+                if (! element.equals(elementScene) && t >= 0 && (mint < 0 || t < mint)) {
+                    mint = t;
+                    lastElement = elementScene;
+                }
+            }
+            if (mint > 0) {
+                Point p2 = new Point(p.getCoords().addition(r.multiplyUsingAScalar(mint)));
+                depth++;
+                Color c2 = calculateColor(scene, p2, r, strategy, lastElement, depth);
+                c = new Color(c.addition(element.getSpecular().schursProduct(c2.getRgb())));
+            }
+        }
+        return c;
     }
 }
