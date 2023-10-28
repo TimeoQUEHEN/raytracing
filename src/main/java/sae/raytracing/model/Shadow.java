@@ -10,11 +10,16 @@ public class Shadow implements IStrategy {
 
     @Override
     public Color model(Scene scene, IElements element, Point p, Vector d, ILight light) {
-        double t = -1;
+        double t;
+        double mint = -1;
         for (IElements elementScene : scene.getElements()) {
-            t = elementScene.getIntersection(light.getLdir(p), p);
-            if (t >= 0 && ! element.equals(elementScene)) return new Color(0,0,0);
+            t = elementScene.getIntersection(new Vector(d.vectorProduct(d.getDestDirNorm())), p);
+            if (!element.equals(elementScene) && t > 0 && (mint < 0 || t < mint)) {
+                mint = t;
+            }
         }
+        if (mint > 0) return new Color(0, 0, 0);
         return childStrat.model(scene, element, p, d, light);
     }
 }
+
