@@ -13,9 +13,7 @@ public class Shadow implements IStrategy {
         double t = -1;
         for (IElements elementScene : scene.getElements()) {
             t = elementScene.getIntersection(light.getLdir(p), p);
-            if (! element.equals(elementScene) && t > 0) {
-                return new Color(0,0,0);
-            }
+            if (t >= 0 && ! element.equals(elementScene)) return new Color(0,0,0);
         }
         return childStrat.model(scene, element, p, d, light);
     }
