@@ -14,13 +14,13 @@ public class Parser {
             IBuilder builder = new SceneBuilder();
             builder.setAmbient(new Color(0,0,0));
             builder.setShadow(false);
+            builder.setMaxDepth(1);
             File imageFile = null;
             Point[] points = new Point[0];
             int index = 0;
             Color diffuse = null;
             Color specular = null;
             int shininess = 1;
-            int maxDepth = 0;
             while(sc.hasNextLine()) {
                 String line = sc.nextLine();
                 if (! line.isEmpty() && line.charAt(0) != '#') {
