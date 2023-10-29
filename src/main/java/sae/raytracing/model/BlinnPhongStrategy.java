@@ -4,6 +4,19 @@ public class BlinnPhongStrategy implements IStrategy{
 
     private IStrategy childStrat;
 
+    /**
+     * The implementation of the colorisation method created by BlinnPhong.
+     * Takes into account the light reflecting on the surface of the element
+     * Creates shadows of the element depending on the position of the pixel vis-à-vis the light.
+     * this strategy is used when the keywords shininess and specular are specified in the input file.
+     *
+     * @param  scene     the scene used to represent the rayTracing
+     * @param  element   the current element in the scene
+     * @param  p         the Point giving the coordinates of the pixel being colorised
+     * @param  d         the vector used for the colorisation
+     * @param  light     the light allowing the colors to be seen
+     * @return           the color of the current pixel
+     */
     @Override
     public Color model(Scene scene, IElements element, Point p, Vector d, ILight light) {
         childStrat = new LambertStrategy();

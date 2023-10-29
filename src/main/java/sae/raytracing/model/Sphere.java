@@ -40,6 +40,16 @@ public class Sphere implements IElements {
 		return r;
 	}
 
+	/**
+	 * Calculates the intersection between a given vector and the current sphere.
+	 * the vector constitutes the direction of the ray of light,
+	 * if there is an intersection, the value of the intersection is returned
+	 * if there are 2, it returns the smaller value.
+	 *
+	 * @param  d    the vector representing the direction of the ray of light
+	 * @param  eye  the point representing the position of the camera in the scene
+	 * @return      the value of the intersection point, or -1 if there is no intersection
+	 */
 	@Override
 	public double getIntersection(Vector d, Point eye) {
 		Point cc = this.center;
