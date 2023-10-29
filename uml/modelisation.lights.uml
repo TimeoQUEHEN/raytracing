@@ -1,0 +1,35 @@
+@startuml
+package sae.raytracing.lights {
+    +interface ILight {
+    Color getColor()
+    Vector getLdir(Point point)
+    }
+
++class LightDirectional implements ILight {
+    - Color color
+    - Vector vector
+    + LightDirectional(Vector vector, Color color)
+    + LightDirectional(double x, double y, double z, double r, double g, double b)
+    + Color getColor()
+    + Vector getLdir(Point point)
+    + Vector getVector()
+    }
+
++class LightPunctual implements ILight{
+       - Color color
+       - Point point
+       + LightPunctual(Point point, Color color)
+       + LightPunctual(double x, double y, double z, double r, double g, double b)
+       + Color getColor()
+       + Vector getLdir(Point p)
+       + Point getPoint()
+    }
+}
+
+Color --o LightDirectional
+Vector --o LightDirectional
+
+Color --o LightPunctual
+Point --o LightPunctual
+
+@enduml

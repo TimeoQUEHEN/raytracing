@@ -1,0 +1,73 @@
+@startuml
+
+package sae.raytracing.triplet {
+
+    +class Triplet {
+        - double x,y,z
+        + Triplet(double x, double y, double z)
+        + String toString()
+        + double getX()
+        + double getY()
+        + double getZ()
+        + Triplet addition(Triplet triplet)
+        + Triplet subtraction(Triplet triplet)
+        + Triplet multiplyUsingAScalar(double d)
+        + double scalarProduct(Triplet triplet)
+        + Triplet vectorProduct(Triplet triplet)
+        + Triplet schursProduct(Triplet triplet)
+        + double length()
+        + Triplet norm()
+    }
+
+    +class Color {
+        - Triplet rgb
+        + Color(double r, double g, double b)
+        + Color(Triplet rgb)
+        + String toString()
+        + double getRValue()
+        + double getGValue()
+        + double getBValue()
+        + Triplet getRgb()
+        + int getIntRgb()
+        + Triplet addition(Triplet triplet)
+        + Triplet multiplyUsingAScalar(double d)
+        + Triplet shurssProduct(Triplet triplet)
+    }
+
+    +class Point {
+        - Triplet coords
+        + Point(double x, double y, double z)
+        + Point(Triplet triplet)
+        + String toString()
+        + double getX()
+        + double getY()
+        + double getZ()
+        + Triplet getCoords()
+        + Triplet subtraction(Triplet triplet)
+        + Triplet multiplyUsingAScalar(double d)
+    }
+
+    +class Vector {
+        - Triplet destDirNorm
+        + Vector(double destination, double direction, double norm)
+        + Vector(Triplet triplet)
+        + String toString()
+        + double getDestination()
+        + double getDirection()
+        + double getNorm()
+        + Triplet getDestDirNorm()
+        + Triplet addition(Triplet triplet)
+        + Triplet subtraction(Triplet triplet)
+        + Triplet multiplyUsingAScalar(double d)
+        + double scalarProduct(Triplet triplet)
+        + Triplet vectorProduct(Triplet triplet)
+        + double length()
+        + Triplet norm()
+    }
+
+Color o-- Triplet
+Point o-- Triplet
+Vector o-- Triplet
+}
+
+@enduml

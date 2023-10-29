@@ -1,0 +1,96 @@
+@startuml
+package sae.raytracing.scene {
+    +interface IBuilder {
+        void setCheckerAll(boolean val, Color c1, Color c2, double size)
+        void setDimensions( int width, int height)
+        void setCamera(Camera camera)
+        void setAmbient(Color color)
+        void setShadow(boolean shadow)
+        void setMaxDepth(int maxDepth)
+        void addLights(ILight lights)
+        void addElements(IElements elements)
+        Scene scene()
+    }
+
+    +class Camera {
+        - Point lookFrom
+        - Point lookAt
+        - Vector up
+        - double fov
+        + Camera(Point lookFrom, Point lookAt, Vector up, double fov)
+        + Camera(double x, double y, double z, double u, double v, double w, double m, double n, double o, double fov)
+        + Point getLookFrom()
+        + Point getLookAt()
+        + Vector getUp()
+        + double getFov()
+    }
+
+    +class SceneBuilder implements IBuilder{
+        - int height
+        - int width
+        - Camera camera
+        - ArrayList<ILight> lights = new ArrayList<>(0)
+        - ArrayList<IElements> elements = new ArrayList<>(0)
+        - Color ambient
+        - boolean shadow
+        - int maxDepth
+        - boolean checker
+        - Color checkerC1
+        - Color checkerC2
+        - double checkerSize
+        + void setCheckerAll(boolean val, Color c1, Color c2, double size)
+        + void setDimensions(int width, int height)
+        + void setCamera(Camera camera)
+        + void setAmbient(Color color)
+        + void setShadow(boolean shadow)
+        + void setMaxDepth(int maxDepth)
+        + void addLights(ILight lights)
+        + void addElements(IElements elements)
+        + Scene scene()
+    }
+    
+    +class Scene {
+         - boolean checker
+         - Color checkerC1
+         - Color checkerC2
+         - double checkerSize
+         - boolean shadow
+         - int height
+         - int width
+         - Camera camera
+         - Color ambient
+         - int maxDepth
+         - List<ILight> lights
+         - List<IElements> elements
+
+         + Scene(int width, int height, Camera camera, Color ambient, boolean shadow, int maxDepth, List<ILight> lights, List<IElements> elements, boolean checker,Color c1,Color c2, double size)
+         + boolean getChecker()
+         + Color getCheckerC1()
+         + Color getCheckerC2()
+         + double getCheckerSize()
+         + int getHeight()
+         + int getWidth()
+         + Camera getCamera()
+         + Color getAmbient()
+         + boolean getShadow()
+         + int getMaxDepth()
+         + List<ILight> getLights()
+         + List<IElements> getElements()
+    }
+
+}
+
+Point --o Camera
+Vector --o Camera
+
+Camera --o SceneBuilder
+ILight --o SceneBuilder
+IElements --o SceneBuilder
+Color --o SceneBuilder
+
+Camera --o Scene
+ILight --o Scene
+IElements --o Scene
+Color --o Scene
+
+@enduml
