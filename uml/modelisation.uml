@@ -1,0 +1,83 @@
+@startuml
+package sae.raytracing.model {
+
+interface IElement {}
+class Plane {
+- Point point
+- Vector vector
++ Plane(Point point, Vector vector)
++ Plane(double x1, double y1, double z1, double x2, double y2, double z2)
++ Point getPoint()
++ Vector getVector()
+}
+class Triangle {
+- Point pX, pY, pZ
++ Triangle(Point x, Point y, PointZ)
++ Point getX()
++ Point getY()
++ Point getZ()
+}
+class Sphere {
+- Point center
+- double r
++ Sphere(double x, double y, double z, double z)
++ double getX()
++ double getY()
++ double getZ()
++ double getR()
+}
+
+class Camera {
+- Point lookFrom, lookAt
+- Vector up
+- double fov
++ Camera(Point lookFrom, Point lookAt, Vector up, double fov)
++ Camera(double x1, double y1, double z1, double x2, double y2, double z2, double x3, double y3, double z3, double fov)
++ Point getLookFrom()
++ Point getLookAt()
++ Point getUp()
++ Point getFov()
+}
+
+class Scene {
+- int height, width
+- Camera camera
+- ILight[] lights
+- IElement[] elements
++ Scene(int height, int width, Camera camera, ILight[] lights, IElements[] elements)
++ int getHeight()
++ int getWidth()
++ Camera getCamera()
++ ILight[] getLight()
++ IElements[] getElements()
+}
+}
+
+Camera --o Scene
+Point ---o Camera
+
+IElement --* Plane
+IElement --* Triangle
+IElement --* Sphere
+
+ILight --* LightDirectional
+ILight --* LightPunctual
+
+ILight ---o Scene
+IElement ---o Scene
+
+package sae.raytracing.model {
+
+class SceneBuilder{
+- int height, width
+- Camera camera
+- ArrayList<ILight> lights
+- ArrayList<IElement> elements
++ void setDimensions(int height, int width)
++ void setCamera(Camera camera)
++ void addLights(ILight lights)
++ void addElements(IElements elements)
++ Scene scene()
+}
+}
+@enduml
