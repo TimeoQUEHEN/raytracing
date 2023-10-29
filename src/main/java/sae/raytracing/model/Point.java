@@ -29,12 +29,26 @@ public class Point {
         return coords.getZ();
     }
 
+    /**
+     * Returns a Triplet corresponding the coordinates of the object.
+     * @return the coordinates of the object
+     */
     public Triplet getCoords() { return this.coords; }
 
+    /**
+     * @param  triplet  the triplet to subtract
+     * @return          the result of the subtraction
+     * @see Triplet#substraction(Triplet)
+     */
     protected Triplet substraction(Triplet triplet) {
         return coords.substraction(triplet);
     }
 
+    /**
+     * @param  d        the double with which to multiply
+     * @return          the result of the multiplication
+     * @see Triplet#multiplyUsingAScalar(double)
+     */
     protected Triplet multiplyUsingAScalar(double d) {
         return coords.multiplyUsingAScalar(d);
     }
