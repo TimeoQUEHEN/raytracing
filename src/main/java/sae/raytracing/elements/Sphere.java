@@ -1,4 +1,8 @@
-package sae.raytracing.model;
+package sae.raytracing.elements;
+
+import sae.raytracing.triplet.Color;
+import sae.raytracing.triplet.Point;
+import sae.raytracing.triplet.Vector;
 
 import static java.lang.Math.sqrt;
 
@@ -54,8 +58,8 @@ public class Sphere implements IElements {
 	public double getIntersection(Vector d, Point eye) {
 		Point cc = this.center;
 		double a = 1 ;
-		double b = eye.substraction(cc.getCoords()).scalarProduct(d.getDestDirNorm()) * 2;
-		double c = eye.substraction(cc.getCoords()).scalarProduct(eye.substraction(cc.getCoords()))-(r*r);
+		double b = eye.subtraction(cc.getCoords()).scalarProduct(d.getDestDirNorm()) * 2;
+		double c = eye.subtraction(cc.getCoords()).scalarProduct(eye.subtraction(cc.getCoords()))-(r*r);
 
 		double delta = b*b-4*a*c;
 		if (delta < 0) {
@@ -74,7 +78,7 @@ public class Sphere implements IElements {
 
 	@Override
 	public Vector getIntersectNorm(Point p) {
-		return new Vector(p.substraction(this.center.getCoords()).norm());
+		return new Vector(p.subtraction(this.center.getCoords()).norm());
 	}
 
 	@Override

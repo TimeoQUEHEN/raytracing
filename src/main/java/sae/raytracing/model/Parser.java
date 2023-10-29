@@ -1,9 +1,18 @@
 package sae.raytracing.model;
 
-import java.io.File;
+import sae.raytracing.Main;
+import sae.raytracing.elements.Plane;
+import sae.raytracing.elements.Sphere;
+import sae.raytracing.elements.Triangle;
+import sae.raytracing.lights.LightDirectional;
+import sae.raytracing.lights.LightPunctual;
+import sae.raytracing.scene.Camera;
+import sae.raytracing.scene.IBuilder;
+import sae.raytracing.scene.SceneBuilder;
+import sae.raytracing.triplet.Color;
+import sae.raytracing.triplet.Point;
 
-import java.io.FileNotFoundException;
-import java.util.Arrays;
+import java.io.File;
 import java.util.Scanner;
 
 public class Parser {
@@ -145,9 +154,9 @@ public class Parser {
                 }
             }
             sc.close();
-            RayTracing.generateImage(builder.Scene(), imageFile);
+            RayTracing.generateImage(builder.scene(), imageFile);
         }catch (Exception e) {
-            System.err.println(e.getMessage());
+            Main.logger.warning(e.getMessage());
         }
     }
 
@@ -155,7 +164,7 @@ public class Parser {
         if (sum.getRgb().getX() + color.getRgb().getX() > 1 ||
             sum.getRgb().getY() + color.getRgb().getY() > 1 ||
             sum.getRgb().getZ() + color.getRgb().getZ() > 1)
-            throw new Exception("The sum of the lights' color has at least one compenent superior to one");
+            throw new Exception("The sum of the lights' color has at least one component superior to one");
     }
 
     private static void colorComponentIncorrect(Color color) throws Exception {
