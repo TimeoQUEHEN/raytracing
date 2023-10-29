@@ -111,6 +111,16 @@ public class Parser {
                         case "maxdepth" :
                             builder.setMaxDepth(Integer.parseInt(keyWord[1]));
                             break;
+                        case "checker" :
+                            builder.setCheckerAll(true,
+                                                new Color(Double.parseDouble(keyWord[1]),
+                                                        Double.parseDouble(keyWord[2]),
+                                                        Double.parseDouble(keyWord[3])),
+                                                new Color(Double.parseDouble(keyWord[4]),
+                                                        Double.parseDouble(keyWord[5]),
+                                                        Double.parseDouble(keyWord[6])),
+                                                Double.parseDouble(keyWord[7])
+                                                );
                     }
                 }
             }
