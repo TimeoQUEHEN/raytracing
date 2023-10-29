@@ -17,6 +17,8 @@ public class Checker implements IStrategy{
      * @param  d        the direction vector
      * @param  light    the light source
      * @return          the color of the point
+     *
+     * @see Scene
      */
     @Override
     public Color model(Scene scene, IElements element, Point p, Vector d, ILight light) {
