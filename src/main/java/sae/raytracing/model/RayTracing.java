@@ -1,10 +1,20 @@
 package sae.raytracing.model;
 
+import sae.raytracing.Main;
+import sae.raytracing.elements.IElements;
+import sae.raytracing.elements.Plane;
+import sae.raytracing.lights.ILight;
+import sae.raytracing.scene.Scene;
+import sae.raytracing.strategy.*;
+import sae.raytracing.triplet.Color;
+import sae.raytracing.triplet.Point;
+import sae.raytracing.triplet.Vector;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 public class RayTracing {
 
@@ -12,17 +22,18 @@ public class RayTracing {
         try {
             BufferedImage image = new BufferedImage(scene.getWidth(), scene.getHeight(), BufferedImage.TYPE_INT_RGB);
             IStrategy strategy;
-            ArrayList<IElements> elements = scene.getElements();
-            if (elements.size() > 0 && elements.get(0).getSpecular() != null) {
+            List<IElements> elements = scene.getElements();
+            if (!elements.isEmpty() && elements.get(0).getSpecular() != null) {
                 strategy = new BlinnPhongStrategy();
-            } else if (elements.size() > 0 && elements.get(0).getDiffuse() != null) {
+            } else if (!elements.isEmpty() && elements.get(0).getDiffuse() != null) {
                 strategy = new LambertStrategy();
             } else {
                 strategy = new BaseStrategy();
-            } if (scene.getShadow()) {
+            }
+            if (scene.getShadow()) {
                 strategy = new Shadow(strategy);
             }
-            Vector w = new Vector(scene.getCamera().getLookFrom().substraction(scene.getCamera().getLookAt().getCoords()).norm());
+            Vector w = new Vector(scene.getCamera().getLookFrom().subtraction(scene.getCamera().getLookAt().getCoords()).norm());
             Vector u = new Vector(scene.getCamera().getUp().vectorProduct(w.getDestDirNorm()).norm());
             Vector v = new Vector(w.vectorProduct(u.getDestDirNorm()).norm());
             double fovr = scene.getCamera().getFov() * Math.PI / 180;
@@ -33,7 +44,7 @@ public class RayTracing {
                 for (int column = 0 ; column < scene.getHeight() ; column++) {
                     double a = (-1) * realWidth/2 + (line + 0.5) * pixelSize;
                     double b = realHeight/2 - (column + 0.5) * pixelSize;
-                    Vector d = new Vector(u.multiplyUsingAScalar(a).addition(v.multiplyUsingAScalar(b)).substraction(w.getDestDirNorm()).norm());
+                    Vector d = new Vector(u.multiplyUsingAScalar(a).addition(v.multiplyUsingAScalar(b)).subtraction(w.getDestDirNorm()).norm());
                     double mint = -1;
                     double t = -1;
                     IElements lastElement = null;
@@ -47,7 +58,6 @@ public class RayTracing {
                     int rgb = 0;
                     if (mint >= 0) {
                         Point p = new Point(scene.getCamera().getLookFrom().getCoords().addition(d.multiplyUsingAScalar(mint)));
-                        /*rgb = lastElement.getColor(scene, p, d, strategy).getIntRgb();*/
                         if (scene.getChecker() && lastElement instanceof Plane) {
                             rgb = calculateCheckerColor(scene,p,lastElement,d).getIntRgb();
                         } else {
@@ -59,11 +69,11 @@ public class RayTracing {
             }
             ImageIO.write(image, "png", outputfile);
             } catch (IOException e) {
-                System.err.println("Error");
+                Main.logger.warning("Error : " + e.getMessage());
             }
     }
 
-    private static Color calculateCheckerColor(Scene scene, Point p, IElements elem,Vector d) {
+    private static Color calculateCheckerColor(Scene scene, Point p, IElements elem, Vector d) {
         IStrategy childstrat = new Checker();
         if (scene.getShadow()) {
             childstrat = new Shadow(childstrat);
@@ -74,7 +84,6 @@ public class RayTracing {
             return c;
         }
         return childstrat.model(scene,elem,p,null,null);
-        //return new Color(elem.getCheckerColor(scene.getCheckerC1(),scene.getCheckerC2(),scene.getCheckerSize(),p).getRgb());
     }
 
     public static Color calculateReflectColor(Scene scene, Point p, Vector d, IStrategy strategy, IElements element,int depth) {
