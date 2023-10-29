@@ -14,16 +14,17 @@ public class Parser {
             IBuilder builder = new SceneBuilder();
             builder.setAmbient(new Color(0,0,0));
             builder.setShadow(false);
+            builder.setMaxDepth(1);
             File imageFile = null;
             Point[] points = new Point[0];
             int index = 0;
             Color diffuse = null;
             Color specular = null;
-            int shininess = 0;
+            int shininess = 1;
             while(sc.hasNextLine()) {
                 String line = sc.nextLine();
                 if (! line.isEmpty() && line.charAt(0) != '#') {
-                    String[] keyWord = line.split(" ");
+                    String[] keyWord = line.split("\\s+");
                     switch (keyWord[0]) {
                         case "output" :
                             imageFile = new File(System.getProperty("user.dir") + '/' + keyWord[1]);
@@ -106,6 +107,20 @@ public class Parser {
                             break;
                         case "shadow" :
                             builder.setShadow(Boolean.parseBoolean(keyWord[1]));
+                            break;
+                        case "maxdepth" :
+                            builder.setMaxDepth(Integer.parseInt(keyWord[1]));
+                            break;
+                        case "checker" :
+                            builder.setCheckerAll(true,
+                                                new Color(Double.parseDouble(keyWord[1]),
+                                                        Double.parseDouble(keyWord[2]),
+                                                        Double.parseDouble(keyWord[3])),
+                                                new Color(Double.parseDouble(keyWord[4]),
+                                                        Double.parseDouble(keyWord[5]),
+                                                        Double.parseDouble(keyWord[6])),
+                                                Double.parseDouble(keyWord[7])
+                                                );
                     }
                 }
             }
