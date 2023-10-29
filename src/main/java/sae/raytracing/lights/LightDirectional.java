@@ -1,8 +1,12 @@
-package sae.raytracing.model;
+package sae.raytracing.lights;
+
+import sae.raytracing.triplet.Color;
+import sae.raytracing.triplet.Point;
+import sae.raytracing.triplet.Vector;
 
 public class LightDirectional implements ILight {
-    private Color color;
-    private Vector vector;
+    private final Color color;
+    private final Vector vector;
 
     public LightDirectional(Vector vector, Color color) {
         this.color = color;

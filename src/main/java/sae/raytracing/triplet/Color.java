@@ -1,8 +1,8 @@
-package sae.raytracing.model;
+package sae.raytracing.triplet;
 
 public class Color {
 
-    private Triplet rgb;
+    private final Triplet rgb;
 
     public Color(double r, double g, double b) {
         this.rgb = new Triplet(r,g,b);
@@ -52,9 +52,9 @@ public class Color {
 
     /**
      * @param triplet the triplet added to the current triplet
-     * @see Triplet#addition(Triplet)
+     * @see Triplet#addition (Triplet)
      */
-    protected Triplet addition(Triplet triplet) {
+    public Triplet addition(Triplet triplet) {
         return rgb.addition(triplet);
     }
 
@@ -62,7 +62,7 @@ public class Color {
      * @param d the double used to multiply the current triplet
      * @see Triplet#multiplyUsingAScalar(double)
      */
-    protected Triplet multiplyUsingAScalar(double d) {
+    public Triplet multiplyUsingAScalar(double d) {
         return rgb.multiplyUsingAScalar(d);
     }
 
@@ -70,7 +70,7 @@ public class Color {
      * @param triplet the triplet used to multiply the current triplet
      * @see Triplet#schursProduct(Triplet)
      */
-    protected Triplet schursProduct(Triplet triplet) {
+    public Triplet schursProduct(Triplet triplet) {
         return rgb.schursProduct(triplet);
     }
 }

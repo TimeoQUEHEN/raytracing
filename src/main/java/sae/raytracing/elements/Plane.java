@@ -1,8 +1,12 @@
-package sae.raytracing.model;
+package sae.raytracing.elements;
+
+import sae.raytracing.triplet.Color;
+import sae.raytracing.triplet.Point;
+import sae.raytracing.triplet.Vector;
 
 public class Plane implements IElements {
-    private Point point;
-    private Vector vector;
+    private final Point point;
+    private final Vector vector;
 
     private final Color diffuse;
 
@@ -41,9 +45,8 @@ public class Plane implements IElements {
      */
     @Override
     public double getIntersection(Vector d, Point eye) {
-        Point q = this.point;
         Vector n = getIntersectNorm(null);
-        return q.substraction(eye.getCoords()).scalarProduct(n.getDestDirNorm())/d.scalarProduct(n.getDestDirNorm());
+        return this.point.subtraction(eye.getCoords()).scalarProduct(n.getDestDirNorm())/d.scalarProduct(n.getDestDirNorm());
     }
 
     /**

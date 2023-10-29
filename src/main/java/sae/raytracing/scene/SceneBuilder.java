@@ -1,9 +1,14 @@
-package sae.raytracing.model;
+package sae.raytracing.scene;
+
+import sae.raytracing.elements.IElements;
+import sae.raytracing.lights.ILight;
+import sae.raytracing.triplet.Color;
 
 import java.util.ArrayList;
 
 public class SceneBuilder implements IBuilder{
-    private int height, width;
+    private int height;
+    private int width;
     private Camera camera;
     private final ArrayList<ILight> lights = new ArrayList<>(0);
     private final ArrayList<IElements> elements = new ArrayList<>(0);
@@ -59,7 +64,7 @@ public class SceneBuilder implements IBuilder{
     }
 
     @Override
-    public Scene Scene() {
+    public Scene scene() {
         return new Scene(this.width,this.height,this.camera,this.ambient,this.shadow,this.maxDepth,this.lights,this.elements,this.checker,this.checkerC1,this.checkerC2,this.checkerSize);
     }
 }
