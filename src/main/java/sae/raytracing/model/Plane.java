@@ -1,9 +1,5 @@
 package sae.raytracing.model;
 
-import java.awt.*;
-
-import static java.lang.Math.sqrt;
-
 public class Plane implements IElements {
     private Point point;
     private Vector vector;
@@ -34,6 +30,15 @@ public class Plane implements IElements {
         return vector;
     }
 
+    /**
+     * Calculates the intersection between a given vector and the current Plane.
+     * the vector constitutes the direction of the ray of light,
+     * if there is an intersection, the value of the intersection is returned
+     *
+     * @param  d    the vector representing the direction of the ray of light
+     * @param  eye  the point representing the position of the camera in the scene
+     * @return      the value of the intersection point
+     */
     @Override
     public double getIntersection(Vector d, Point eye) {
         Point q = this.point;
@@ -41,6 +46,12 @@ public class Plane implements IElements {
         return q.substraction(eye.getCoords()).scalarProduct(n.getDestDirNorm())/d.scalarProduct(n.getDestDirNorm());
     }
 
+    /**
+     * Retrieve the normalized intersection vector between the current Plane and a given point.
+     *
+     * @param  p  Is unused in this function, but it is required by the interface
+     * @return    the normalized intersection vector
+     */
     @Override
     public Vector getIntersectNorm(Point p) {
         return this.vector;
