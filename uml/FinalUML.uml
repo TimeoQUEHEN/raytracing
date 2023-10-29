@@ -1,0 +1,334 @@
+@startuml
+package sae.raytracing {
+    +class Main {
+        + {static} Logger logger
+        + {static} void main(String[] args)
+    }
+}
+
+
+
+package sae.raytracing.triplet {
+
+    +class Triplet {
+        - double x,y,z
+        + Triplet(double x, double y, double z)
+        + String toString()
+        + double getX()
+        + double getY()
+        + double getZ()
+        + Triplet addition(Triplet triplet)
+        + Triplet subtraction(Triplet triplet)
+        + Triplet multiplyUsingAScalar(double d)
+        + double scalarProduct(Triplet triplet)
+        + Triplet vectorProduct(Triplet triplet)
+        + Triplet schursProduct(Triplet triplet)
+        + double length()
+        + Triplet norm()
+    }
+
+    +class Color {
+        - Triplet rgb
+        + Color(double r, double g, double b)
+        + Color(Triplet rgb)
+        + String toString()
+        + double getRValue()
+        + double getGValue()
+        + double getBValue()
+        + Triplet getRgb()
+        + int getIntRgb()
+        + Triplet addition(Triplet triplet)
+        + Triplet multiplyUsingAScalar(double d)
+        + Triplet shurssProduct(Triplet triplet)
+    }
+
+    +class Point {
+        - Triplet coords
+        + Point(double x, double y, double z)
+        + Point(Triplet triplet)
+        + String toString()
+        + double getX()
+        + double getY()
+        + double getZ()
+        + Triplet getCoords()
+        + Triplet subtraction(Triplet triplet)
+        + Triplet multiplyUsingAScalar(double d)
+    }
+
+    +class Vector {
+        - Triplet destDirNorm
+        + Vector(double destination, double direction, double norm)
+        + Vector(Triplet triplet)
+        + String toString()
+        + double getDestination()
+        + double getDirection()
+        + double getNorm()
+        + Triplet getDestDirNorm()
+        + Triplet addition(Triplet triplet)
+        + Triplet subtraction(Triplet triplet)
+        + Triplet multiplyUsingAScalar(double d)
+        + double scalarProduct(Triplet triplet)
+        + Triplet vectorProduct(Triplet triplet)
+        + double length()
+        + Triplet norm()
+    }
+
+Color o-- Triplet
+Point o-- Triplet
+Vector o-- Triplet
+}
+
+
+
+package sae.raytracing.strategy {
+    +interface IStrategy {
+        Color model(Scene scene, IElements element, Point p, Vector d, ILight light)
+    }
+
+    +class Checker implements IStrategy{
+        + Color model(Scene scene, IElements element, Point p, Vector d, ILight light)
+    }
+
+    +class BaseStrategy implements IStrategy{
+        public Color model(Scene scene, IElements elements, Point p, Vector d, ILight light)
+    }
+
+    +class LambertStrategy implements IStrategy{
+         + Color model(Scene scene, IElements element, Point p, Vector d, ILight light)
+    }
+
+    +class BlinnPhongStrategy implements IStrategy{
+         + Color model(Scene scene, IElements element, Point p, Vector d, ILight light)
+    }
+
+    +class Shadow implements IStrategy {
+         - IStrategy childStrat
+         + Shadow(IStrategy childStrat)
+         + Color model(Scene scene, IElements element, Point p, Vector d, ILight light)
+    }
+}
+
+IStrategy --o Shadow
+
+
+
+package sae.raytracing.scene {
+    +interface IBuilder {
+        void setCheckerAll(boolean val, Color c1, Color c2, double size)
+        void setDimensions( int width, int height)
+        void setCamera(Camera camera)
+        void setAmbient(Color color)
+        void setShadow(boolean shadow)
+        void setMaxDepth(int maxDepth)
+        void addLights(ILight lights)
+        void addElements(IElements elements)
+        Scene scene()
+    }
+
+    +class Camera {
+        - Point lookFrom
+        - Point lookAt
+        - Vector up
+        - double fov
+        + Camera(Point lookFrom, Point lookAt, Vector up, double fov)
+        + Camera(double x, double y, double z, double u, double v, double w, double m, double n, double o, double fov)
+        + Point getLookFrom()
+        + Point getLookAt()
+        + Vector getUp()
+        + double getFov()
+    }
+
+    +class SceneBuilder implements IBuilder{
+        - int height
+        - int width
+        - Camera camera
+        - ArrayList<ILight> lights = new ArrayList<>(0)
+        - ArrayList<IElements> elements = new ArrayList<>(0)
+        - Color ambient
+        - boolean shadow
+        - int maxDepth
+        - boolean checker
+        - Color checkerC1
+        - Color checkerC2
+        - double checkerSize
+        + void setCheckerAll(boolean val, Color c1, Color c2, double size)
+        + void setDimensions(int width, int height)
+        + void setCamera(Camera camera)
+        + void setAmbient(Color color)
+        + void setShadow(boolean shadow)
+        + void setMaxDepth(int maxDepth)
+        + void addLights(ILight lights)
+        + void addElements(IElements elements)
+        + Scene scene()
+    }
+
+    +class Scene {
+         - boolean checker
+         - Color checkerC1
+         - Color checkerC2
+         - double checkerSize
+         - boolean shadow
+         - int height
+         - int width
+         - Camera camera
+         - Color ambient
+         - int maxDepth
+         - List<ILight> lights
+         - List<IElements> elements
+
+         + Scene(int width, int height, Camera camera, Color ambient, boolean shadow, int maxDepth, List<ILight> lights, List<IElements> elements, boolean checker,Color c1,Color c2, double size)
+         + boolean getChecker()
+         + Color getCheckerC1()
+         + Color getCheckerC2()
+         + double getCheckerSize()
+         + int getHeight()
+         + int getWidth()
+         + Camera getCamera()
+         + Color getAmbient()
+         + boolean getShadow()
+         + int getMaxDepth()
+         + List<ILight> getLights()
+         + List<IElements> getElements()
+    }
+
+}
+
+
+package sae.raytracing.model {
+    +class Parser {
+        + {static} void reader(File textFile)
+        - {static} void colorComponentIncorrect(Color sum, Color color)
+        - {static} void colorComponentIncorrect(Color color)
+        }
+
+    +class RayTracing {
+        + {static} void generateImage(Scene scene, File outputfile)
+        - {static} Color calculateCheckerColor(Scene scene, Point p, IElements elem, Vector d)
+        - {static} Color calculateReflectColor(Scene scene, Point p, Vector d, IStrategy strategy, IElements element,int depth)
+        }
+}
+
+
+package sae.raytracing.lights {
+    +interface ILight {
+    Color getColor()
+    Vector getLdir(Point point)
+    }
+
++class LightDirectional implements ILight {
+    - Color color
+    - Vector vector
+    + LightDirectional(Vector vector, Color color)
+    + LightDirectional(double x, double y, double z, double r, double g, double b)
+    + Color getColor()
+    + Vector getLdir(Point point)
+    + Vector getVector()
+    }
+
++class LightPunctual implements ILight{
+       - Color color
+       - Point point
+       + LightPunctual(Point point, Color color)
+       + LightPunctual(double x, double y, double z, double r, double g, double b)
+       + Color getColor()
+       + Vector getLdir(Point p)
+       + Point getPoint()
+    }
+}
+
+
+
+package sae.raytracing.lights {
+    +interface IElements {
+        double getIntersection(Vector d, Point eye)
+        Vector getIntersectNorm(Point p)
+        Color getDiffuse()
+        Color getSpecular()
+        int getShininess()
+    }
+
++class Plane implements IElements {
+        - Point point
+        - Vector vector
+        - Color diffuse
+        - Color specular
+        - int shininess
+        + Plane(Point point, Vector vector, Color diffuse, Color specular, int shininess)
+        + Plane(double x1, double y1, double z1, double x2, double y2, double z2, Color diffuse, Color specular, int shininess)
+        + Point getPoint()
+        + Vector getVector()
+        + double getIntersection(Vector d, Point eye)
+        + Vector getIntersectNorm(Point p)
+        + Color getDiffuse()
+        + Color getSpecular()
+        + int getShininess()
+    }
+
++class Sphere implements IElements {
+       - Point center
+       - double r
+       - Color diffuse
+       - Color specular
+       - int shininess
+       + Sphere(Point point, double r, Color diffuse, Color specular, int shininess)
+       + Sphere(double x, double y, double z, double r, Color diffuse, Color specular, int shininess)
+       + Point getX()
+       + Point getY()
+       + Point getZ()
+       + double getR()
+       + double getIntersection(Vector d, Point eye)
+       + Vector getIntersectNorm(Point p)
+       + Color getDiffuse()
+       + Color getSpecular()
+       + int getShininess()
+    }
+
++class Triangle implements IElements {
+       - Point pX
+       - Point pY
+       - Point pZ
+       - Color diffuse
+       - Color specular
+       - int shininess
+       + Triangle(Point x, Point y, Point z, Color diffuse, Color specular, int shininess)
+       + Point getX()
+       + Point getY()
+       + Point getZ()
+       + double getIntersection(Vector d, Point eye)
+       + Vector getIntersectNorm(Point p)
+       + Color getDiffuse()
+       + Color getSpecular()
+       + int getShininess()
+    }
+}
+
+Color --o Plane
+Vector --o Plane
+Point --o Plane
+
+Color --o Sphere
+Point --o Sphere
+
+Color --o Triangle
+Point --o Triangle
+
+Point --o Camera
+Vector --o Camera
+
+Camera --o SceneBuilder
+ILight --o SceneBuilder
+IElements --o SceneBuilder
+Color --o SceneBuilder
+
+Camera --o Scene
+ILight --o Scene
+IElements --o Scene
+Color --o Scene
+
+
+Color --o LightDirectional
+Vector --o LightDirectional
+
+Color --o LightPunctual
+Point --o LightPunctual
+@enduml
