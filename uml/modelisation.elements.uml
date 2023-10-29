@@ -1,0 +1,76 @@
+@startuml
+package sae.raytracing.lights {
+    +interface IElements {
+        double getIntersection(Vector d, Point eye)
+        Vector getIntersectNorm(Point p)
+        Color getDiffuse()
+        Color getSpecular()
+        int getShininess()
+    }
+
++class Plane implements IElements {
+        - Point point
+        - Vector vector
+        - Color diffuse
+        - Color specular
+        - int shininess
+        + Plane(Point point, Vector vector, Color diffuse, Color specular, int shininess)
+        + Plane(double x1, double y1, double z1, double x2, double y2, double z2, Color diffuse, Color specular, int shininess)
+        + Point getPoint()
+        + Vector getVector()
+        + double getIntersection(Vector d, Point eye)
+        + Vector getIntersectNorm(Point p)
+        + Color getDiffuse()
+        + Color getSpecular()
+        + int getShininess()
+    }
+
++class Sphere implements IElements {
+       - Point center
+       - double r
+       - Color diffuse
+       - Color specular
+       - int shininess
+       + Sphere(Point point, double r, Color diffuse, Color specular, int shininess)
+       + Sphere(double x, double y, double z, double r, Color diffuse, Color specular, int shininess)
+       + Point getX()
+       + Point getY()
+       + Point getZ()
+       + double getR()
+       + double getIntersection(Vector d, Point eye)
+       + Vector getIntersectNorm(Point p)
+       + Color getDiffuse()
+       + Color getSpecular()
+       + int getShininess()
+    }
+
++class Triangle implements IElements {
+       - Point pX
+       - Point pY
+       - Point pZ
+       - Color diffuse
+       - Color specular
+       - int shininess
+       + Triangle(Point x, Point y, Point z, Color diffuse, Color specular, int shininess)
+       + Point getX()
+       + Point getY()
+       + Point getZ()
+       + double getIntersection(Vector d, Point eye)
+       + Vector getIntersectNorm(Point p)
+       + Color getDiffuse()
+       + Color getSpecular()
+       + int getShininess()
+    }
+}
+
+Color --o Plane
+Vector --o Plane
+Point --o Plane
+
+Color --o Sphere
+Point --o Sphere
+
+Color --o Triangle
+Point --o Triangle
+
+@enduml

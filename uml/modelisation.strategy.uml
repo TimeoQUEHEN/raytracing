@@ -1,0 +1,32 @@
+@startuml
+package sae.raytracing.strategy {
+    +interface IStrategy {
+        Color model(Scene scene, IElements element, Point p, Vector d, ILight light)
+    }
+
+    +class Checker implements IStrategy{
+        + Color model(Scene scene, IElements element, Point p, Vector d, ILight light)
+    }
+
+    +class BaseStrategy implements IStrategy{
+        public Color model(Scene scene, IElements elements, Point p, Vector d, ILight light)
+    }
+
+    +class LambertStrategy implements IStrategy{
+         + Color model(Scene scene, IElements element, Point p, Vector d, ILight light)
+    }
+
+    +class BlinnPhongStrategy implements IStrategy{
+         + Color model(Scene scene, IElements element, Point p, Vector d, ILight light)
+    }
+
+    +class Shadow implements IStrategy {
+         - IStrategy childStrat
+         + Shadow(IStrategy childStrat)
+         + Color model(Scene scene, IElements element, Point p, Vector d, ILight light)
+    }
+}
+
+IStrategy --o Shadow
+
+@enduml
