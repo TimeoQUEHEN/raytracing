@@ -41,7 +41,7 @@ public class Sphere implements IElements {
 	}
 
 	/**
-	 * Calculates the intersection between a given vector and the current sphere.
+	 * Calculates the intersection between a given vector and the current Sphere.
 	 * the vector constitutes the direction of the ray of light,
 	 * if there is an intersection, the value of the intersection is returned
 	 * if there are 2, it returns the smaller value.
@@ -72,6 +72,12 @@ public class Sphere implements IElements {
 		}
 	}
 
+	/**
+	 * Returns the normalized intersection vector between the current sphere and a given point.
+	 *
+	 * @param  p  the point to calculate the intersection vector with
+	 * @return    the normalized intersection vector
+	 */
 	@Override
 	public Vector getIntersectNorm(Point p) {
 		return new Vector(p.substraction(this.center.getCoords()).norm());
