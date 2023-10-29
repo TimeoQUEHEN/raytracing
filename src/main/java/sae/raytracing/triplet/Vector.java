@@ -1,11 +1,8 @@
-package sae.raytracing.model;
-
-import static java.lang.Math.pow;
-import static java.lang.Math.sqrt;
+package sae.raytracing.triplet;
 
 public class Vector {
 
-    private Triplet destDirNorm;
+    private final Triplet destDirNorm;
 
     public Vector(double destination, double direction, double norm) {
         this.destDirNorm = new Triplet(destination,direction,norm);
@@ -40,25 +37,25 @@ public class Vector {
 
     /**
      * @param triplet the triplet added to the current triplet
-     * @see Triplet#addition(Triplet)
+     * @see Triplet#addition (Triplet)
      */
-    protected Triplet addition(Triplet triplet) {
+    public Triplet addition(Triplet triplet) {
         return destDirNorm.addition(triplet);
     }
 
     /**
-     * @param triplet the triplet substracted from the current triplet (creates a Point)
-     * @see Triplet#substraction(Triplet)
+     * @param triplet the triplet subtracted from the current triplet (creates a Point)
+     * @see Triplet#subtraction (Triplet)
      */
-    protected Triplet substraction(Triplet triplet) {
-        return destDirNorm.substraction(triplet);
+    public Triplet subtraction(Triplet triplet) {
+        return destDirNorm.subtraction(triplet);
     }
 
     /**
      * @param d the scalar value used to multiply the current triplet
      * @see Triplet#multiplyUsingAScalar(double)
      */
-    protected Triplet multiplyUsingAScalar(double d) {
+    public Triplet multiplyUsingAScalar(double d) {
         return destDirNorm.multiplyUsingAScalar(d);
     }
 
@@ -66,7 +63,7 @@ public class Vector {
      * @param triplet the triplet used to multiply the current triplet
      * @see Triplet#scalarProduct(Triplet)
      */
-    protected double scalarProduct(Triplet triplet) {
+    public double scalarProduct(Triplet triplet) {
         return destDirNorm.scalarProduct(triplet);
     }
 
@@ -74,21 +71,21 @@ public class Vector {
      * @param triplet the triplet used to multiply the current triplet
      * @see Triplet#vectorProduct(Triplet)
      */
-    protected Triplet vectorProduct(Triplet triplet) {
+    public Triplet vectorProduct(Triplet triplet) {
         return destDirNorm.vectorProduct(triplet);
     }
 
     /**
      * @see Triplet#length()
      */
-    protected double length() {
+    public double length() {
         return destDirNorm.length();
     }
 
     /**
      * @see Triplet#norm()
      */
-    protected Triplet norm() {
+    public Triplet norm() {
         return destDirNorm.norm();
     }
 }
