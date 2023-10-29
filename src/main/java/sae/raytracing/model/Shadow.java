@@ -1,7 +1,5 @@
 package sae.raytracing.model;
 
-import javax.swing.text.Element;
-
 public class Shadow implements IStrategy {
 
     private IStrategy childStrat;
@@ -16,13 +14,26 @@ public class Shadow implements IStrategy {
         if (light instanceof LightPunctual lightPunctual) {
             double tl = lightPunctual.getPoint().substraction(p.getCoords()).length();
             for (IElements elementScene : scene.getElements()) {
-                t = elementScene.getIntersection(light.getLdir(p),p);
-                if (t > 0 && t < tl && ! element.equals(elementScene)) return new Color(0,0,0);
+                if (! element.equals(elementScene)) {
+                    t = elementScene.getIntersection(light.getLdir(p),p);
+                    if (t > 0 && t < tl) return new Color(0, 0, 0);
+                } else {
+                    t = -element.getIntersection(light.getLdir(p), lightPunctual.getPoint());
+                    if (t + 0.0000001 < tl) return new Color(0,0,0);
+                }
             }
         } else {
             for (IElements elementScene : scene.getElements()) {
-                t = elementScene.getIntersection(light.getLdir(p), p);
-                if (t > 0 && ! element.equals(elementScene)) return new Color(0,0,0);
+                if (element.equals(elementScene) && element instanceof Sphere sphere) {
+                    Point pLight = new Point(light.getLdir(p).multiplyUsingAScalar(sphere.getR()*2).addition(p.getCoords()));
+                    double tl = pLight.substraction(p.getCoords()).length();
+                    t = -element.getIntersection(light.getLdir(p), pLight);
+                    if (t + 0.0000001 < tl) return new Color(0,0,0);
+                }
+                else {
+                    t = elementScene.getIntersection(light.getLdir(p), p);
+                    if (t > 0 && ! element.equals(elementScene)) return new Color(0,0,0);
+                }
             }
         }
         return childStrat.model(scene, element, p, d, light);
