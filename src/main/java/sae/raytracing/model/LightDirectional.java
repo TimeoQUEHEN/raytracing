@@ -18,6 +18,12 @@ public class LightDirectional implements ILight {
         return this.color;
     }
 
+    /**
+     * Retrieves the direction vector from a given point to the current point.
+     *
+     * @param  p  the point to calculate the direction from
+     * @return    the direction vector from p to the current point
+     */
     @Override
     public Vector getLdir(Point point) {
         return new Vector(vector.norm());
