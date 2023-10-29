@@ -10,6 +10,18 @@ public class SceneBuilder implements IBuilder{
     private Color ambient;
     private boolean shadow;
     private int maxDepth;
+    private boolean checker;
+    private Color checkerC1;
+    private Color checkerC2;
+    private double checkerSize;
+
+    @Override
+    public void setCheckerAll(boolean val, Color c1, Color c2, double size) {
+        this.checker = val;
+        this.checkerC1 = c1;
+        this.checkerC2 = c2;
+        this.checkerSize = size;
+    }
 
     // Implement Interface Methods
     @Override
@@ -48,6 +60,6 @@ public class SceneBuilder implements IBuilder{
 
     @Override
     public Scene Scene() {
-        return new Scene(this.width,this.height,this.camera,this.ambient,this.shadow,this.maxDepth,this.lights,this.elements);
+        return new Scene(this.width,this.height,this.camera,this.ambient,this.shadow,this.maxDepth,this.lights,this.elements,this.checker,this.checkerC1,this.checkerC2,this.checkerSize);
     }
 }

@@ -48,7 +48,11 @@ public class RayTracing {
                     if (mint >= 0) {
                         Point p = new Point(scene.getCamera().getLookFrom().getCoords().addition(d.multiplyUsingAScalar(mint)));
                         /*rgb = lastElement.getColor(scene, p, d, strategy).getIntRgb();*/
-                        rgb = calculateColor(scene,p,d,strategy,lastElement,1).getIntRgb();
+                        if (scene.getChecker() && lastElement instanceof Plane) {
+                            rgb = calculateCheckerColor(scene,p,lastElement,d).getIntRgb();
+                        } else {
+                            rgb = calculateReflectColor(scene,p,d,strategy,lastElement,1).getIntRgb();
+                        }
                     }
                     image.setRGB(line,column,rgb);
                 }
@@ -59,7 +63,21 @@ public class RayTracing {
             }
     }
 
-    public static Color calculateColor(Scene scene, Point p, Vector d, IStrategy strategy, IElements element,int depth) {
+    private static Color calculateCheckerColor(Scene scene, Point p, IElements elem,Vector d) {
+        IStrategy childstrat = new Checker();
+        if (scene.getShadow()) {
+            childstrat = new Shadow(childstrat);
+            Color c = new Color(0,0,0);
+            for (ILight light : scene.getLights()) {
+                c = new Color(c.addition(childstrat.model(scene,elem,p,d,light).getRgb()));
+            }
+            return c;
+        }
+        return childstrat.model(scene,elem,p,null,null);
+        //return new Color(elem.getCheckerColor(scene.getCheckerC1(),scene.getCheckerC2(),scene.getCheckerSize(),p).getRgb());
+    }
+
+    public static Color calculateReflectColor(Scene scene, Point p, Vector d, IStrategy strategy, IElements element,int depth) {
         Color c = new Color(0,0,0);
         for (ILight light : scene.getLights()) {
             c = new Color(c.addition(strategy.model(scene,element,p,d,light).getRgb()));
@@ -79,9 +97,13 @@ public class RayTracing {
             }
             if (mint > 0) {
                 Point p2 = new Point(p.getCoords().addition(r.multiplyUsingAScalar(mint)));
-                depth++;
-                Color c2 = calculateColor(scene, p2, r, strategy, lastElement, depth);
-                c = new Color(c.addition(element.getSpecular().schursProduct(c2.getRgb())));
+                if (scene.getChecker() && lastElement instanceof Plane) {
+                    return new Color(c.addition(RayTracing.calculateCheckerColor(scene,p2,lastElement,r).addition(scene.getAmbient().getRgb()).multiplyUsingAScalar(0.5)));
+                } else {
+                    depth++;
+                    Color c2 = calculateReflectColor(scene, p2, r, strategy, lastElement, depth);
+                    c = new Color(c.addition(element.getSpecular().schursProduct(c2.getRgb())));
+                }
             }
         }
         return c;
