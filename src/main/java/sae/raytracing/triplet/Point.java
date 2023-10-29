@@ -1,4 +1,4 @@
-package sae.raytracing.model;
+package sae.raytracing.triplet;
 
 public class Point {
 
@@ -38,10 +38,10 @@ public class Point {
     /**
      * @param  triplet  the triplet to subtract
      * @return          the result of the subtraction
-     * @see Triplet#substraction(Triplet)
+     * @see Triplet#subtraction (Triplet)
      */
-    protected Triplet substraction(Triplet triplet) {
-        return coords.substraction(triplet);
+    public Triplet subtraction(Triplet triplet) {
+        return coords.subtraction(triplet);
     }
 
     /**
@@ -49,15 +49,7 @@ public class Point {
      * @return          the result of the multiplication
      * @see Triplet#multiplyUsingAScalar(double)
      */
-    protected Triplet multiplyUsingAScalar(double d) {
+    public Triplet multiplyUsingAScalar(double d) {
         return coords.multiplyUsingAScalar(d);
     }
-
-    /*public static void main(String[] args){
-        Point p1 = new Point(4,2,2);
-        Point p2 = new Point(3,3,1);
-        Vector sub = new Vector(p1.substraction(p2.coords));
-        System.out.println("sub : "+sub.toString());
-        System.out.println("multiply by a scalar : "+new Point(p1.multiplyUsingAScalar(3)));
-    }*/
 }

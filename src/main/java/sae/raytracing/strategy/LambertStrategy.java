@@ -1,8 +1,14 @@
-package sae.raytracing.model;
+package sae.raytracing.strategy;
+
+import sae.raytracing.elements.IElements;
+import sae.raytracing.lights.ILight;
+import sae.raytracing.scene.Scene;
+import sae.raytracing.triplet.Color;
+import sae.raytracing.triplet.Point;
+import sae.raytracing.triplet.Vector;
 
 public class LambertStrategy implements IStrategy{
 
-    private IStrategy childStrat;
 
     /**
      * Calculate the color of a pixel in the scene using the Lambert model.
@@ -17,6 +23,7 @@ public class LambertStrategy implements IStrategy{
      */
     @Override
     public Color model(Scene scene, IElements element, Point p, Vector d, ILight light) {
+        IStrategy childStrat;
         childStrat = new BaseStrategy();
         Vector n = element.getIntersectNorm(p);
         Color ld = new Color(light.getColor().multiplyUsingAScalar(Math.max(n.scalarProduct(light.getLdir(p).getDestDirNorm()), 0)).schursProduct(element.getDiffuse().getRgb()));

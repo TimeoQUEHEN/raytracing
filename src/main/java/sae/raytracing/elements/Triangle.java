@@ -1,4 +1,9 @@
-package sae.raytracing.model;
+package sae.raytracing.elements;
+
+import sae.raytracing.triplet.Color;
+import sae.raytracing.triplet.Point;
+import sae.raytracing.triplet.Triplet;
+import sae.raytracing.triplet.Vector;
 
 public class Triangle implements IElements {
     private final Point pX;
@@ -37,12 +42,12 @@ public class Triangle implements IElements {
     public double getIntersection(Vector d, Point eye) {
         Point a = this.pX;
         Vector n = getIntersectNorm(null);
-        double t = a.substraction(eye.getCoords()).scalarProduct(n.getDestDirNorm())/d.scalarProduct(n.getDestDirNorm());
+        double t = a.subtraction(eye.getCoords()).scalarProduct(n.getDestDirNorm())/d.scalarProduct(n.getDestDirNorm());
         Triplet p = eye.getCoords().addition(d.multiplyUsingAScalar(t));
 
-        if (n.scalarProduct((this.pY.getCoords().substraction(a.getCoords())).vectorProduct(p.substraction(a.getCoords()))) >= 0 &&
-                n.scalarProduct((this.pZ.getCoords().substraction(this.pY.getCoords())).vectorProduct(p.substraction(this.pY.getCoords()))) >= 0 &&
-                n.scalarProduct((a.getCoords().substraction(this.pZ.getCoords())).vectorProduct(p.substraction(this.pZ.getCoords()))) >= 0){
+        if (n.scalarProduct((this.pY.getCoords().subtraction(a.getCoords())).vectorProduct(p.subtraction(a.getCoords()))) >= 0 &&
+                n.scalarProduct((this.pZ.getCoords().subtraction(this.pY.getCoords())).vectorProduct(p.subtraction(this.pY.getCoords()))) >= 0 &&
+                n.scalarProduct((a.getCoords().subtraction(this.pZ.getCoords())).vectorProduct(p.subtraction(this.pZ.getCoords()))) >= 0){
             return t;
         } else {return -1;}
     }
@@ -50,7 +55,7 @@ public class Triangle implements IElements {
 
     @Override
     public Vector getIntersectNorm(Point p) {
-        return new Vector((this.pY.substraction(this.pX.getCoords())).vectorProduct(this.pZ.substraction(this.pX.getCoords())).norm());
+        return new Vector((this.pY.subtraction(this.pX.getCoords())).vectorProduct(this.pZ.subtraction(this.pX.getCoords())).norm());
     }
 
     @Override
