@@ -1,8 +1,12 @@
-package sae.raytracing.model;
+package sae.raytracing.lights;
+
+import sae.raytracing.triplet.Color;
+import sae.raytracing.triplet.Point;
+import sae.raytracing.triplet.Vector;
 
 public class LightDirectional implements ILight {
-    private Color color;
-    private Vector vector;
+    private final Color color;
+    private final Vector vector;
 
     public LightDirectional(Vector vector, Color color) {
         this.color = color;
@@ -18,6 +22,12 @@ public class LightDirectional implements ILight {
         return this.color;
     }
 
+    /**
+     * Retrieves the direction vector from a given point to the current point.
+     *
+     * @param  p  the point to calculate the direction from
+     * @return    the direction vector from p to the current point
+     */
     @Override
     public Vector getLdir(Point point) {
         return new Vector(vector.norm());

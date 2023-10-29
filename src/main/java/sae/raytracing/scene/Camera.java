@@ -1,10 +1,13 @@
-package sae.raytracing.model;
+package sae.raytracing.scene;
+
+import sae.raytracing.triplet.Point;
+import sae.raytracing.triplet.Vector;
 
 public class Camera {
-    private Point lookFrom;
-    private Point lookAt;
-    private Vector up;
-    private double fov;
+    private final Point lookFrom;
+    private final Point lookAt;
+    private final Vector up;
+    private final double fov;
 
     public Camera(Point lookFrom, Point lookAt, Vector up, double fov) {
         this.lookFrom = lookFrom;

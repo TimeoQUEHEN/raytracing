@@ -1,12 +1,12 @@
-package sae.raytracing.model;
+package sae.raytracing.elements;
 
-import java.awt.*;
-
-import static java.lang.Math.sqrt;
+import sae.raytracing.triplet.Color;
+import sae.raytracing.triplet.Point;
+import sae.raytracing.triplet.Vector;
 
 public class Plane implements IElements {
-    private Point point;
-    private Vector vector;
+    private final Point point;
+    private final Vector vector;
 
     private final Color diffuse;
 
@@ -34,13 +34,27 @@ public class Plane implements IElements {
         return vector;
     }
 
+    /**
+     * Calculates the intersection between a given vector and the current Plane.
+     * the vector constitutes the direction of the ray of light,
+     * if there is an intersection, the value of the intersection is returned
+     *
+     * @param  d    the vector representing the direction of the ray of light
+     * @param  eye  the point representing the position of the camera in the scene
+     * @return      the value of the intersection point
+     */
     @Override
     public double getIntersection(Vector d, Point eye) {
-        Point q = this.point;
         Vector n = getIntersectNorm(null);
-        return q.substraction(eye.getCoords()).scalarProduct(n.getDestDirNorm())/d.scalarProduct(n.getDestDirNorm());
+        return this.point.subtraction(eye.getCoords()).scalarProduct(n.getDestDirNorm())/d.scalarProduct(n.getDestDirNorm());
     }
 
+    /**
+     * Retrieve the normalized intersection vector between the current Plane and a given point.
+     *
+     * @param  p  Is unused in this function, but it is required by the interface
+     * @return    the normalized intersection vector
+     */
     @Override
     public Vector getIntersectNorm(Point p) {
         return this.vector;

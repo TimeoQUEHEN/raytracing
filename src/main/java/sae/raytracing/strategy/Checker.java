@@ -1,4 +1,11 @@
-package sae.raytracing.model;
+package sae.raytracing.strategy;
+
+import sae.raytracing.elements.IElements;
+import sae.raytracing.lights.ILight;
+import sae.raytracing.scene.Scene;
+import sae.raytracing.triplet.Color;
+import sae.raytracing.triplet.Point;
+import sae.raytracing.triplet.Vector;
 
 public class Checker implements IStrategy{
 
@@ -8,7 +15,7 @@ public class Checker implements IStrategy{
      * if both are inferior to 0.5, the color is scene.getCheckerC1()
      * or, if both are superior to 0.5, the color is scene.getCheckerC1()
      * Otherwise, the color is scene.getCheckerC2()
-     *
+     * <p>
      * the parameters d and light are not used, but need to be implemented due to the development pattern used.
      *
      * @param  scene    the scene being rendered
