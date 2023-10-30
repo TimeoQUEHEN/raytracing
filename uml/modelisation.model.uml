@@ -1,0 +1,15 @@
+@startuml
+package sae.raytracing.model {
+    +class Parser {
+        + {static} void reader(File textFile)
+        - {static} void colorComponentIncorrect(Color sum, Color color)
+        - {static} void colorComponentIncorrect(Color color)
+        }
+
+    +class RayTracing {
+        + {static} void generateImage(Scene scene, File outputfile)
+        - {static} Color calculateCheckerColor(Scene scene, Point p, IElements elem, Vector d)
+        - {static} Color calculateReflectColor(Scene scene, Point p, Vector d, IStrategy strategy, IElements element,int depth)
+        }
+}
+@enduml

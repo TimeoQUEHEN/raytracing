@@ -1,0 +1,8 @@
+@startuml
+package sae.raytracing {
+    +class Main {
+        + {static} Logger logger
+        + {static} void main(String[] args)
+    }
+}
+@enduml
